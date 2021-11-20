@@ -4,43 +4,53 @@
       افزودن دسته بندی
     </v-card-title>
     <v-card-text>
-
-      <v-form ref="form" @submit.prevent="addCategory">
+      <v-form @submit.prevent="addCategory">
+        <v-row>
+          <v-col
+            cols="12"
+            sm="6"
+          >
         <v-text-field
           label=" نام دسته بندی"
           outlined
           v-model="form.name"
           color="primary"
-          :rules="rules"
         >
         </v-text-field>
-        <v-text-field
-          label="توضیحات"
-          outlined
-          v-model="form.description"
-          color="primary"
-          :rules="rules"
-        >
-        </v-text-field>
-        <v-file-input
-          label="آیکون"
-          v-model="form.icon"
-          prepend-icon="mdi-camera"
-          :rules="rules"
-          outlined
-        ></v-file-input>
+          </v-col>
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <v-file-input
+              label="آیکون"
+              v-model="form.icon"
+              prepend-icon="mdi-camera"
+              outlined
+            ></v-file-input>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-text-field
+            label="توضیحات"
+            outlined
+            v-model="form.description"
+            color="primary"
+          >
+          </v-text-field>
+        </v-row>
         <v-btn
+          class="mt-3"
           type="submit"
           color="pink"
+          @click="addCategory"
         >
-           {{ edit ? editBtn : addBtn}}
+          {{ edit ? editBtn : addBtn}}
         </v-btn>
       </v-form>
-
     </v-card-text>
   </v-card>
 </template>
-
 <script>
 export default {
   name: "Categories",
@@ -55,10 +65,12 @@ export default {
             icon: ''
           }
         },
+
       edit:{
-         type:Boolean,
+        type:Boolean,
         default: false
       },
+
       loading: {
         type: Boolean,
         default: false
@@ -69,9 +81,9 @@ export default {
     return {
       editBtn : 'ویرایش' ,
       addBtn : 'افزودن',
-      rules: [
-        value => !value || 'مقدار نباید خالی باشد',
-      ],
+      // rules: [
+      //   value => !value || 'مقدار نباید خالی باشد',
+      // ],
     }
   },
 

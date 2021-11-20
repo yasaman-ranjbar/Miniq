@@ -6,20 +6,28 @@
       :edit="edit"
       @addCategoryToList="createCategory"
     />
-    <v-data-table class="mt-4" :headers="headers" :items="lists">
+    <v-data-table class="mt-4" :headers="headers" :items="lists" hide-default-footer>
       <template v-slot:item="row" >
         <tr>
           <td> <img :src="row.item.icon" alt="" width="50"></td>
           <td>{{row.item.name}}</td>
           <td>{{row.item.description}}</td>
           <td>
-            <v-icon @click="deleteList(row.item.id)" color="red">mdi-delete</v-icon>
-            <v-icon @click="goEdit(row.item.id)" color="blue">mdi-pencil</v-icon>
-            <v-icon @click="addQuestion(row.item.id)" color="green">mdi-plus-circle</v-icon>
+            <v-icon @click="deleteList(row.item.id)" color="red accent-3">mdi-delete</v-icon>
+            <v-icon @click="goEdit(row.item.id)" color="light-blue accent-2">mdi-pencil</v-icon>
+            <v-icon @click="addQuestion(row.item.id)" color="light-green accent-4">mdi-plus-circle</v-icon>
           </td>
         </tr>
       </template>
     </v-data-table>
+    <div>
+      <v-pagination
+        class="ma-4"
+        v-model="page"
+        :length="last_page"
+        :total-visible="7"
+      ></v-pagination>
+    </div>
 
   </div>
 </template>
@@ -64,6 +72,9 @@ export default {
       ],
 
       lists: [],
+
+      page: 1,
+      last_page: 0,
     }
   },
 
@@ -71,9 +82,15 @@ export default {
     this.categoryList()
   },
 
+  watch: {
+    page() {
+      this.categoryList();
+    }
+  },
+
   methods: {
     addQuestion(id) {
-      this.$router.push(`category/question/${id}`)
+      this.$router.push(`category/${id}`)
     },
 
     createCategory(id) {
@@ -82,11 +99,13 @@ export default {
         name: this.form.name,
         description: this.form.description,
         icon: this.form.icon,
+        id: this.form.id
         }
       )
         .then(res => {
           if (res) {
-            console.log(res)
+            // console.log(res)
+            this.categoryList();
             }
            else {
             this.loading = false;
@@ -98,11 +117,14 @@ export default {
     },
 
     categoryList() {
-      this.$store.dispatch("category/list")
+      this.$store.dispatch("category/list", {
+        page: this.page
+      })
         .then (res => {
           if (res) {
             console.log(res);
-            this.lists = res;
+            this.lists = res.data;
+            this.last_page = res.last_page
           }
         })
     },
