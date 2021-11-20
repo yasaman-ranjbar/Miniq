@@ -45,20 +45,23 @@
       <template>
         <div class="text-center">
           <v-menu offset-y>
-            <template v-slot:activator="{ on, attrs }">
+            <template v-slot:activator="{ attrs, on }">
               <v-btn
-                small
-                fab
-                color="primary"
-                dark
+                color="pink"
                 v-bind="attrs"
                 v-on="on"
+                fab
+                small
+                class="ml-6"
               >
                 <v-icon>mdi-account-circle</v-icon>
               </v-btn>
             </template>
+
             <v-list>
-              <v-list-item>
+              <v-list-item
+                link
+              >
                 <v-list-item-title @click="logout">خروج</v-list-item-title>
               </v-list-item>
             </v-list>
@@ -100,7 +103,7 @@ export default {
         {
           icon: 'mdi-account',
           title: 'مدیریت کاربران',
-          to: '/usres'
+          to: '/users'
         },
         {
           icon: 'mdi-book-multiple',
@@ -117,7 +120,7 @@ export default {
 
   methods:{
     logout() {
-
+      this.$auth.logout()
     }
   }
 }

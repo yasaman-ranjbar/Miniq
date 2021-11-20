@@ -16,12 +16,14 @@ export default {
           category_id: payload.category_id
         },
       })
-        .then (res => {
-        console.log(res.data.result)
-        if (res.data.result) {
-          return res.data.result;
-        }
-      })
+        .then(res => {
+          console.log(res)
+          if (res.status === 200) {
+            if (res.data.result) {
+              return res.data.result;
+            }
+          }
+        })
         .catch(err => err.data);
     },
 
@@ -29,10 +31,6 @@ export default {
       return this.$axios({
         url: `api/admin/questions/show/${payload.id}`,
         method: "get",
-        data:{
-          text: payload.text,
-          id: payload.id
-        }
       })
         .then(res => {
           if (res.data.result) {
@@ -43,6 +41,28 @@ export default {
           err.message
         });
 
+    },
+
+    update({ commit }, payload) {
+      return this.$axios({
+        url: `/api/admin/questions/edit/${payload.id}`,
+        method: "put",
+        data: {
+          text: payload.text,
+          id: payload.id
+        },
+      })
+        .then(res => {
+          console.log(res)
+          if (res.status === 200) {
+            if (res.data.result) {
+              return res.data.result;
+            }
+          }
+        })
+        .catch(err => {
+          return false;
+        });
     },
   }
 }

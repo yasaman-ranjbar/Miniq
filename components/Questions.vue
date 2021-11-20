@@ -5,7 +5,7 @@
     </v-card-title>
 
     <v-card-text>
-      <v-form>
+      <v-form @submit.prevent="addQuestion">
         <v-text-field
           label="سوال"
           outlined
@@ -14,11 +14,11 @@
         >
         </v-text-field>
         <v-btn
-          @click="addQuestion"
+          type="submit"
           :loading="loading"
           color="pink"
         >
-          افزودن سوال
+          {{ edit ? editBtn : addBtn}}
         </v-btn>
 
       </v-form>
@@ -39,15 +39,18 @@ export default {
         text: '',
       },
     },
-
+    edit:{
+      type:Boolean,
+      default: false
+    },
     category_id:'',
-
     loading:false
   },
 
   data(){
     return {
-
+      editBtn : 'ویرایش' ,
+      addBtn : 'افزودن',
     }
   },
 

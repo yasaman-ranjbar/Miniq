@@ -25,21 +25,26 @@ export default {
       })
         .then(res => {
           console.log(res)
+          if (res.status === 200) {
+            if (res.data.result) {
+              return res.data.result;
+            }
+          }
         })
         .catch(err => {
           return false;
         });
     },
 
-    list() {
+    list({ commit} , payload) {
       return this.$axios({
-        url: `api/admin/categories/list`,
+        url: `api/admin/categories/list?page=${payload.page}`,
         method: "get"
       })
         .then(res => {
           if (res.status === 200) {
             if (res.data.result.data) {
-              return res.data.result.data;
+              return res.data.result;
 
             }
           }
@@ -53,10 +58,6 @@ export default {
       return this.$axios({
         url: `api/admin/categories/show/${payload.id}`,
         method: "get",
-        data:{
-          name: payload.name,
-          id: payload.id
-        }
       })
         .then(res => {
             if (res.data.result) {
@@ -72,8 +73,12 @@ export default {
     update({ commit }, payload) {
       return this.$axios({
         url: `/api/admin/categories/edit/${payload.id}`,
-        method: "get",
-        data: payload,
+        method: "put",
+        data: {
+          name: payload.name,
+          description: payload.description,
+          id: payload.id
+        },
       })
         .then(res => {
           console.log(res)
@@ -88,36 +93,6 @@ export default {
         });
     },
 
-    // delete({ commit }, payload) {
-    //   return this.$axios({
-    //     url: `/api/admin/categories/delete/${payload.id}`,
-    //     method: "delete"
-    //   })
-    //     .then(res => {
-    //       if (res.status === 200) {
-    //         if (res.data.result.data) {
-    //           return res.data.result.data;
-    //         }
-    //       }
-    //     })
-    //     .catch(err => { err.message });
-    // },
-
-    // categoryList() {
-    //   return this.$axios({
-    //     url: `api/admin/categories/list`,
-    //     method: "get",
-    //   })
-    //     .then(res => {
-    //       console.log(res)
-    //       if (res.status === 200) {
-    //         if (res.data) {
-    //           return res.data;
-    //         }
-    //       }
-    //     })
-    //     .catch(err => { });
-    // },
 
   }
 

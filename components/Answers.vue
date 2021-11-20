@@ -17,27 +17,24 @@
             label=" وارد کرن پاسخ "
             outlined
           ></v-text-field>
-
-          <v-radio-group
+          <v-switch
             v-model="form.is_correct"
-            row
-          >
-            <v-radio
-              label="پاسخ درست"
-              value="1"
-            ></v-radio>
-            <v-radio
-              label="پاسخ اشتباه"
-              value="0"
-            ></v-radio>
-          </v-radio-group>
+            :label="form.is_correct ? 'پاسخ درست' : 'پاسخ اشتباه'"
+          ></v-switch>
+<!--          <v-radio-group-->
+<!--            v-model="form.is_correct"-->
+<!--            row-->
+<!--          >-->
+<!--            <v-radio-->
+<!--              label="پاسخ درست"-->
+<!--              value="1"-->
+<!--            ></v-radio>-->
+<!--            <v-radio-->
+<!--              label="پاسخ اشتباه"-->
+<!--              value="0"-->
+<!--            ></v-radio>-->
+<!--          </v-radio-group>-->
 
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-        >
         </v-col>
       </v-row>
         <v-btn
@@ -45,7 +42,7 @@
           type="submit"
           color="pink"
         >
-          افزودن
+          {{ edit ? editBtn : addBtn}}
         </v-btn>
       </v-form>
     </v-card-text>
@@ -66,11 +63,19 @@ export default {
         default: false
       }
     },
+
+    edit:{
+      type:Boolean,
+      default: false
+    },
+
     loading:false
   },
 
   data () {
     return {
+      editBtn : 'ویرایش' ,
+      addBtn : 'افزودن',
     }
   },
 
