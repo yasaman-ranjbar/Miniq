@@ -1,11 +1,13 @@
 ---
 stages:
-  - development
+  - stage
+  - imageregistry
+  - prod
 variables:
   GIT_STRATEGY: none
 
-development:
-  stage: development
+staging:
+  stage: stage
   script:
   - cd /opt/miniq-web/miniq-web/
   - git config --global user.name "Hossein Ghorbani"
@@ -15,6 +17,32 @@ development:
   - cd /opt/miniq-web
   - docker pull localhub.minimum.money/miniq/miniq-web:latest
   - docker-compose down && docker-compose up -d
+  - sleep 5;docker-compose ps
   only:
   - tmaster
   tags: [tmaster]
+
+PushImage:
+  stage: imageregistry
+  script:
+  - docker tag localhub.minimum.money/miniq/miniq-web:latest remotehub.minimum.money/miniq/miniq-web:latest
+  - docker push remotehub.minimum.money/miniq/miniq-web:latest
+  only:
+  - master
+  tags: [tmaster]
+
+production:
+  stage: prod
+  script:
+  - cd /opt/miniq-web/miniq-web/
+  - git config --global user.name "Hossein Ghorbani"
+  - git config --global user.email "h.ghorbani@mobtakerteam.com"
+  - git stash
+  - git pull origin master
+  - cd /opt/miniq-web
+  - docker pull localhub.minimum.money/miniq/miniq-web:latest
+  - docker-compose down && docker-compose up -d
+  - sleep 5;docker-compose ps
+  only:
+  - master
+  tags: [master]
