@@ -1,0 +1,21 @@
+---
+stages:
+  - development
+
+variables:
+  GIT_STRATEGY: none
+
+development:
+  stage: development
+  script:
+  - cd /opt/miniq-web/miniq-web/
+  - git config --global user.name "Hossein Ghorbani"
+  - git config --global user.email "h.ghorbani@mobtakerteam.com"
+  - git stash
+  - git pull origin tmaster
+  - cd /opt/miniq-web
+  - docker pull localhub.minimum.money/miniq/miniq-web:latest
+  - docker-compose down && docker-compose up -d
+  only:
+  - tmaster
+  tags: [tmaster]
