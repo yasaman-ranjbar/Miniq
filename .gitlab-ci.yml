@@ -28,7 +28,7 @@ PushImage:
   - docker tag localhub.minimum.money/miniq/miniq-web:latest remotehub.minimum.money/miniq/miniq-web:latest
   - docker push remotehub.minimum.money/miniq/miniq-web:latest
   only:
-  - master
+  - tmaster
   tags: [tmaster]
 
 production:
