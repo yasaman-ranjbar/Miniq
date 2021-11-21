@@ -1,7 +1,6 @@
 ---
 stages:
   - development
-
 variables:
   GIT_STRATEGY: none
 
