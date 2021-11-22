@@ -44,7 +44,7 @@ production:
   - git stash
   - git pull origin master
   - cd /opt/miniq-web
-  - docker pull localhub.minimum.money/miniq/miniq-web:latest
+  - docker pull remotehub.minimum.money/miniq/miniq-web:latest
   - docker-compose down && docker-compose up -d
   - sleep 5;docker-compose ps
   only:
