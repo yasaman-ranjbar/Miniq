@@ -89,7 +89,7 @@
 <script>
 export default {
   middleware:'isLogin',
-  data () {
+  data () { 
     return {
       clipped: false,
       drawer: false,
