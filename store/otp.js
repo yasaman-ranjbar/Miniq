@@ -13,10 +13,8 @@ export default {
         method: "post",
         data: payload,
       }).then(res => {
-        console.log(res.data.meta.status)
+        // console.log(res.data.meta.status)
         if (res.data.meta.status) {
-          // commit("REGISTER_USER", res.data.data);
-          // this.$toast.success("کد تایید برای شما ارسال شد");
           return res.data.meta.status;
         }
         return false;

@@ -16,7 +16,7 @@
       @createQuestion="createQuestion"
     />
 
-    <v-data-table class="mt-4" :headers="headers" :items="questions">
+    <v-data-table class="mt-4" :headers="headers" :items="questions"  hide-default-footer>
       <template v-slot:item="row" >
         <tr>
           <td>{{row.item.text}}</td>
@@ -29,6 +29,14 @@
         </tr>
       </template>
     </v-data-table>
+    <div>
+      <v-pagination
+        class="ma-4"
+        v-model="page"
+        :length="last_page"
+        :total-visible="7"
+      ></v-pagination>
+    </div>
   </div>
 </template>
 
@@ -60,6 +68,9 @@ export default {
       loading:false,
       category_Name: '',
       category_Icon: '',
+
+      page: 1,
+      last_page: 0,
     }
   },
 
@@ -89,9 +100,10 @@ export default {
     },
 
     questionsList() {
-      this.$axios.$get(`/api/admin/questions/list/category/${this.category_id}`)
+      this.$axios.$get(`/api/admin/questions/list/category/${this.category_id}/?page=${this.page}`)
       .then( res=> {
         this.questions = res.result.data
+        this.last_page = res.last_page
       })
     },
 
@@ -122,7 +134,7 @@ export default {
       this.edit = true
       this.$axios.$get(`/api/admin/questions/show/${id}`)
         .then( res => {
-          console.log(res)
+          // console.log(res)
           this.form = res.result
         })
     }

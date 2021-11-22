@@ -122,7 +122,7 @@ export default {
       })
         .then (res => {
           if (res) {
-            console.log(res);
+            // console.log(res);
             this.lists = res.data;
             this.last_page = res.last_page
           }
@@ -142,26 +142,10 @@ export default {
         .then( res => {
           this.form = res.result
         })
-      // this.isUpdating = true
-      // this.$axios.$get(`/api/admin/categories/show/${id}`)
-      // .then( res => {
-      //   console.log(res.result.name)
-      //   this.form.name = res.result.name
-      //   this.form.description = res.result.description
-      //   this.form.icon = res.result.icon
-      // })
+
     },
 
-    // updateCategory(id) {
-    //   this.isUpdating = true
-    //   if( this.isUpdating = true) {
-    //     this.$axios.$put(`/api/admin/categories/edit/${id}`)
-    //     .then (res => {
-    //       console.log(res)
-    //       // res.result.name = this.form.name
-    //     })
-    //   }
-    // }
+    
   }
 }
 </script>

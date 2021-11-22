@@ -45,6 +45,7 @@ export default {
         .dispatch("otp/otp", {
           mobile: this.form.mobile
         })
+        
         .then(res => {
           if (res) {
             this.loading = false;
