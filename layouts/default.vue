@@ -88,7 +88,7 @@
 
 <script>
 export default {
-  // middleware:'auth',
+  middleware:'isLogin',
   data () {
     return {
       clipped: false,

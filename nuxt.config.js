@@ -2,6 +2,7 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  ssr: false,
   head: {
     titleTemplate: '%s - مینی کیو',
     htmlAttrs: {
@@ -28,6 +29,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     // "~/plugins/axios.js",
+    "~/plugins/vuex-persist.js"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -62,7 +64,7 @@ export default {
       }
     },
     redirect: {
-      login: '/',
+      login: '/login',
       logout: '/login',
       home: '/',
       callback: '/callback',
@@ -73,14 +75,14 @@ export default {
   axios: {
     // baseURL: 'http://192.168.0.61:5200',
     proxy: true,
-      headers: {
-        'App-Id' : 'miniq',
-        'App-Key' : '781262c8e52384afc08626d3944efe9162790fa8c0384e09347ccdff42eeb30',
-      }
+    headers: {
+      'App-Id': 'miniq',
+      'App-Key': '781262c8e52384afc08626d3944efe9162790fa8c0384e09347ccdff42eeb30',
+    }
   },
 
   proxy: {
-    '/api/': { target: 'http://192.168.0.40:5200', pathRewrite: {'^/api/': '/'}, changeOrigin: true }
+    '/api/': { target: process.env.BASE_URL, pathRewrite: { '^/api/': '/' }, changeOrigin: true }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -91,9 +93,9 @@ export default {
       dark: true,
       themes: {
         dark: {
-          primary:'#ff3392',
+          primary: '#ff3392',
           accent: colors.grey.darken3,
-          secondary:'#81D4FA',
+          secondary: '#81D4FA',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,

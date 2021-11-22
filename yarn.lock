@@ -3570,6 +3570,11 @@ flat@^5.0.0:
   resolved "https://registry.yarnpkg.com/flat/-/flat-5.0.2.tgz#8ca6fe332069ffa9d324c327198c598259ceb241"
   integrity sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==
 
+flatted@^3.0.5:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.4.tgz#28d9969ea90661b5134259f312ab6aa7929ac5e2"
+  integrity sha512-8/sOawo8tJ4QOBX8YlQBMxL8+RLZfxMQOif9o0KUKTNTjMYElWPE0r/m5VNFxTRd0NSw8qSy8dajrwX4RYI1Hw==
+
 flatten@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.3.tgz#c1283ac9f27b368abc1e36d1ff7b04501a30356b"
@@ -7861,6 +7866,14 @@ vuetify@^2.5.3, vuetify@^2.5.5:
   version "2.5.10"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.5.10.tgz#165cb3de9dbffbc94bc775aa2f698eb9fa89eabe"
   integrity sha512-UODZQrib36l7i1WGg0MUvurczLspYTe0nKAmfbwyMs6dC2lG1Q1VV9caqPbCAB9zgG6QIJaOmRQKSKduw9eZTw==
+
+vuex-persist@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/vuex-persist/-/vuex-persist-3.1.3.tgz#518c722a2ca3026bcee5732f99d24f75cee0f3b6"
+  integrity sha512-QWOpP4SxmJDC5Y1+0+Yl/F4n7z27syd1St/oP+IYCGe0X0GFio0Zan6kngZFufdIhJm+5dFGDo3VG5kdkCGeRQ==
+  dependencies:
+    deepmerge "^4.2.2"
+    flatted "^3.0.5"
 
 vuex@^3.6.2:
   version "3.6.2"
