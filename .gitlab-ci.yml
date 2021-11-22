@@ -15,9 +15,11 @@ staging:
   - git stash
   - git pull origin tmaster
   - cd /opt/miniq-web
+  - export DOCKER_CLIENT_TIMEOUT=300
+  - export COMPOSE_HTTP_TIMEOUT=300
   - docker pull localhub.minimum.money/miniq/miniq-web:latest
   - docker-compose down && docker-compose up -d
-  - sleep 15;docker-compose ps
+  - sleep 5;docker-compose ps
   only:
   - tmaster
   tags: [tmaster]
@@ -37,6 +39,8 @@ production:
   - cd /opt/miniq-web/miniq-web/
   - git config --global user.name "Hossein Ghorbani"
   - git config --global user.email "h.ghorbani@mobtakerteam.com"
+  - export DOCKER_CLIENT_TIMEOUT=300
+  - export COMPOSE_HTTP_TIMEOUT=300
   - git stash
   - git pull origin master
   - cd /opt/miniq-web
