@@ -101,11 +101,12 @@ export default {
           .then( res => {
             this.listAnswer();
           })
+            // this.form.is_correct = ""
+            // this.form.text = ''
           .catch(err => {
-            console.log(err)
+            // console.log(err)
           })
-        this.form.is_correct = ""
-        this.form.text = ''
+ 
       }
     },
 
