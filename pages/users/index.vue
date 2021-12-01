@@ -50,6 +50,7 @@
         <td>{{row.item.rank}}</td>
         <td>
           <v-icon @click="goEdit(row.item)" color="light-blue accent-2">mdi-pencil</v-icon>
+          <v-icon @click="showProfile(row.item)" color="pink">mdi-eye-check</v-icon>
         </td>
       </tr>
     </template>
@@ -105,6 +106,8 @@ export default {
       edit: false,
       loading: false,
 
+      userId : '' ,
+
     }
   },
 
@@ -149,6 +152,10 @@ export default {
           }
         });
           this.form = '';
+    },
+
+    showProfile(id) {
+      this.$router.push(`users/${id.id}`)
     }
   }
 }

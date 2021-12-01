@@ -9,7 +9,15 @@ export default {
     list({ commit} , payload) {
       return this.$axios({
         url:`/api/admin/users/list?page=${payload.page}`,
-        method: 'get'
+        method: 'get',
+        data: {
+          id : payload.id,
+          fullname: payload.fullname,
+          mobile: payload.mobile,
+          rank: payload.rank,
+          elixir: payload.elixir,
+          gem: payload.gem
+        }
       })
         .then(res => {
           if (res.status === 200) {

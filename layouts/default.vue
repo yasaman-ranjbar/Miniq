@@ -8,6 +8,36 @@
       app
       right
     >
+      <template v-slot:prepend>
+
+        <v-row
+          align="center"
+          class="spacer py-4"
+          no-gutters
+        >
+          <v-col
+            sm="2"
+            class="col-lg-3 px-3"
+          >
+            <v-img
+              :src="iconPrepend"
+              alt="miniq"
+              width="60"
+              class="iconPrepend"
+            >
+            </v-img>
+          </v-col>
+          <v-col
+            class="hidden-xs-only  col-lg-9 "
+            sm="5"
+            md="3"
+          >
+            مینی کیو
+          </v-col>
+        </v-row>
+      </template>
+
+      <v-divider></v-divider>
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -15,6 +45,7 @@
           :to="item.to"
           router
           exact
+          class="my-3"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -89,7 +120,7 @@
 <script>
 export default {
   middleware:'isLogin',
-  data () { 
+  data () {
     return {
       clipped: false,
       drawer: false,
@@ -109,12 +140,18 @@ export default {
           icon: 'mdi-book-multiple',
           title: 'دسته بندی ها',
           to: '/category'
-        }
+        },
+        {
+          icon: 'mdi-account-group',
+          title: 'تورنومنت',
+          to: '/tornoment'
+        },
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'مینی کیو'
+      title: 'مینی کیو',
+      iconPrepend: require('@/assets/images/logo.jpg'),
     }
   },
 
@@ -125,3 +162,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.iconPrepend {
+  border: 1px transparent solid;
+  border-radius: 10px;
+}
+</style>
