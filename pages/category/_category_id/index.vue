@@ -20,8 +20,8 @@
       <template v-slot:item="row" >
         <tr>
           <td>{{row.item.text}}</td>
+           <td><v-icon @click="playVoice(row.item.voice)" color="red accent-3">mdi-arrow-right-drop-circle</v-icon></td>
           <td>
-
             <v-icon @click="deleteQuestion(row.item.id)" color="red accent-3">mdi-delete</v-icon>
             <v-icon @click="goEdit(row.item.id)" color="light-blue accent-2">mdi-pencil</v-icon>
             <v-icon @click="addAnswer(row.item.id)" color="light-green accent-4">mdi-plus-circle</v-icon>
@@ -54,6 +54,11 @@ export default {
           align:'right',
         },
         {
+          text: 'پخش صدا',
+          value:'id',
+          align:'right',
+        },
+        {
           text: 'عملیات',
           value:'id',
           align:'right',
@@ -62,8 +67,10 @@ export default {
       edit: false,
       questions:[],
       form: {
-        text:''
+        text:'',
+        voice_file: '',
       },
+      voice:'',
       category_id: this.$route.params.category_id,
       loading:false,
       category_Name: '',
@@ -78,7 +85,12 @@ export default {
     this.questionsList();
     this.showCategory();
   },
-
+  
+  watch: {
+    page() {
+      this.categoryList();
+    }
+  },
 
   methods:{
     createQuestion() {
@@ -86,7 +98,8 @@ export default {
       this.$store.dispatch( this.edit ? 'question/update' : 'question/create' ,{
         text: this.form.text,
         id: this.form.id,
-        category_id: this.category_id
+        category_id: this.category_id,
+        voice_file: this.form.voice_file
       })
         .then(res => {
           if (res) {
@@ -103,7 +116,7 @@ export default {
       this.$axios.$get(`/api/admin/questions/list/category/${this.category_id}/?page=${this.page}`)
       .then( res=> {
         this.questions = res.result.data
-        this.last_page = res.last_page
+        this.last_page = res.result.last_page
       })
     },
 
@@ -137,6 +150,11 @@ export default {
           // console.log(res)
           this.form = res.result
         })
+    },
+
+    playVoice(voice) {
+      const audio = new Audio(voice)
+      audio.play();
     }
   }
 }

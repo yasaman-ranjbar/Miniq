@@ -13,15 +13,16 @@
     :edit="edit"
     @addAnswer="addAnswer"
   />
-  <v-data-table class="mt-4" :headers="headers" :items="lists">
+  <v-data-table class="mt-4" :headers="headers" :items="lists" hide-default-footer>
     <template v-slot:item="row" >
       <tr>
         <td>
-          <v-icon :color="row.item.is_correct ? 'light-green accent-4' : 'red accent-4'">
-            {{ row.item.is_correct ? 'mdi-check-circle' : 'mdi-close-circle'}}
+          <v-icon :color="row.item.is_correct === '1' ? 'light-green accent-4' : 'red accent-4'">
+            {{ row.item.is_correct === '1' ? 'mdi-check-circle' : 'mdi-close-circle'}}
           </v-icon>
         </td>
         <td>{{row.item.text}}</td>
+        <td><v-icon @click="playSound( row.item.voice )" color="red accent-3">mdi-arrow-right-drop-circle</v-icon></td>
         <td>
           <v-icon @click="deleteAnswers(row.item.id)" color="red accent-3">mdi-delete</v-icon>
           <v-icon @click="goEdit(row.item)" color="light-blue accent-2">mdi-pencil</v-icon>
@@ -42,8 +43,9 @@ export default {
   data() {
     return {
       form:{
-        is_correct: false, // default: true or false
-        text: ''
+        is_correct: 0, // default: true or false
+        text: '',
+        voice_file: '',
       },
       loading:false,
 
@@ -57,6 +59,11 @@ export default {
         },
         {
           text: 'جواب ها',
+          value: '',
+          align:'right',
+        },
+         {
+          text: 'پخش صدا',
           value: '',
           align:'right',
         },
@@ -83,37 +90,28 @@ export default {
 
   methods:{
     addAnswer() {
-      if(this.edit){
-        this.$axios.$put(`/api/admin/answers/edit/${this.Question_Id}/${this.form.id}`, this.form)
-        .then(res=> {
-          this.form.text = res.result.text
-          this.form = {
-            is_correct: false,
-            text: ''
-          }
-          this.listAnswer();
-          // this.form.is_correct = res.result.is_correct
-        })
-      }
-
-      else {
-        this.$axios.post(`/api/admin/answers/create/${this.id}`, this.form)
-          .then( res => {
+      this.loading = true
+      this.$store.dispatch( this.edit ? 'answer/update' : 'answer/create' ,{
+        text: this.form.text,
+        is_correct: this.form.is_correct,
+        Question_Id : this.Question_Id,
+        voice_file: this.form.voice_file,
+        id : this.form.id,
+      })
+        .then(res => {
+          if (res) {
+            this.loading = false;
             this.listAnswer();
-          })
-            // this.form.is_correct = ""
-            // this.form.text = ''
-          .catch(err => {
-            // console.log(err)
-          })
- 
-      }
+          } else {
+            this.loading = false;
+          }
+        });
+      this.form.text = '';
     },
 
     listAnswer() {
       this.$axios.$get(`api/admin/answers/list/${this.id}`)
       .then( res => {
-        console.log(res.result)
         this.lists = res.result
       })
     },
@@ -123,7 +121,6 @@ export default {
         id : this.category_Id
       })
       .then(res=> {
-        console.log(res)
       })
     },
 
@@ -143,7 +140,6 @@ export default {
       })
       .then(res => {
         this.Question_Id = res.result.id
-        console.log(res.result.id)
       })
     },
 
@@ -157,6 +153,11 @@ export default {
     goEdit(item) {
       this.edit = true
       this.form = item
+    },
+
+     playSound (voice) {
+      const audio = new Audio(voice)
+      audio.play();
     }
   }
 }

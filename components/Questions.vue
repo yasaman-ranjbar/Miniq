@@ -13,6 +13,12 @@
           color="primary"
         >
         </v-text-field>
+        <v-file-input
+          label="آپلود صدا"
+          v-model="form.voice_file"
+          outlined
+          dense
+        ></v-file-input>
         <v-btn
           type="submit"
           :loading="loading"
@@ -37,6 +43,7 @@ export default {
       type: Object,
       default: {
         text: '',
+        voice_file: '',
       },
     },
     edit:{
