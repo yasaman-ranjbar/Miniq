@@ -42,7 +42,12 @@
       </v-form>
     </v-card-text>
   </v-card>
-  <v-data-table class="mt-4" :headers="headers" :items="lists" hide-default-footer>
+  <v-data-table class="mt-4" 
+                :headers="headers" 
+                :items="lists" 
+                hide-default-footer
+                :items-per-page="15"
+  >
     <template v-slot:item="row" >
       <tr>
         <td> {{row.item.fullname}}</td>
