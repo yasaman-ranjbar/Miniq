@@ -7,14 +7,18 @@ export default {
   },
 
   actions:{
-    create ({ commit }, payload) {
+    create({ commit }, payload) {
+      let formData = new FormData();
+      formData.append("text", payload.text);
+      formData.append("category_id", payload.category_id);
+
       return this.$axios({
         url: `api/admin/questions/create`,
         method: "post",
-        data: {
-          text : payload.text,
-          category_id: payload.category_id
-        },
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       })
         .then(res => {
           console.log(res)
@@ -24,8 +28,11 @@ export default {
             }
           }
         })
-        .catch(err => err.data);
+        .catch(err => {
+          return false;
+        });
     },
+
 
     show({ commit }, payload) {
       return this.$axios({
@@ -49,7 +56,8 @@ export default {
         method: "put",
         data: {
           text: payload.text,
-          id: payload.id
+          id: payload.id,
+          voice_file: payload.voice_file
         },
       })
         .then(res => {

@@ -10,7 +10,7 @@
       <template v-slot:item="row" >
         <tr>
           <td> {{row.item.start_time}}</td>
-          <td>{{row.item.type = 0 ? 'تورنومنت هفتگی' : 'تورنومنت ماهانه'}}</td>
+          <td>{{row.item.type == 0 ? 'تورنومنت هفتگی' : 'تورنومنت ماهانه'}}</td>
           <td>
             <v-icon @click="goDelete(row.item.id)" color="red accent-3">mdi-delete</v-icon>
             <v-icon @click="goEdit(row.item)" color="light-blue accent-2">mdi-pencil</v-icon>

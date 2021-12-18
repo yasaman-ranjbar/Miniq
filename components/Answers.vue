@@ -17,23 +17,29 @@
             label=" وارد کرن پاسخ "
             outlined
           ></v-text-field>
-          <v-switch
-            v-model="form.is_correct"
-            :label="form.is_correct ? 'پاسخ درست' : 'پاسخ اشتباه'"
-          ></v-switch>
-<!--          <v-radio-group-->
+          <v-file-input
+            label="آپلود صدا"
+            v-model="form.voice_file"
+            outlined
+            dense
+          ></v-file-input>
+<!--          <v-switch-->
 <!--            v-model="form.is_correct"-->
-<!--            row-->
-<!--          >-->
-<!--            <v-radio-->
-<!--              label="پاسخ درست"-->
-<!--              value="1"-->
-<!--            ></v-radio>-->
-<!--            <v-radio-->
-<!--              label="پاسخ اشتباه"-->
-<!--              value="0"-->
-<!--            ></v-radio>-->
-<!--          </v-radio-group>-->
+<!--            :label="form.is_correct ? 'پاسخ درست' : 'پاسخ اشتباه'"-->
+<!--          ></v-switch>-->
+          <v-radio-group
+            v-model="form.is_correct"
+            row
+          >
+            <v-radio
+              label="پاسخ درست"
+              value="1"
+            ></v-radio>
+            <v-radio
+              label="پاسخ اشتباه"
+              value="0"
+            ></v-radio>
+          </v-radio-group>
 
         </v-col>
       </v-row>
@@ -53,15 +59,14 @@
 export default {
 
   props: {
+
     form:{
-      text: {
-          type: String,
-          default:'',
+      type: Object,
+      default: {
+        is_correct : 0,
+        text: '',
+        voice_file: '',
       },
-      is_correct: {
-        type: Boolean,
-        default: false
-      }
     },
 
     edit:{

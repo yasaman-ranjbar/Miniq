@@ -127,7 +127,7 @@ export default {
         page: this.page
       })
       .then(res=> {
-        this.lists = res
+        this.lists = res.data;
         this.last_page = res.last_page
       })
     },

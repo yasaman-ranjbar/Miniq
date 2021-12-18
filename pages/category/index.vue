@@ -133,6 +133,7 @@ export default {
       this.$axios.delete(`/api/admin/categories/delete/${id}`)
       .then( res => {
         this.lists.splice(id , 1);
+        this.categoryList();
       })
       },
 
@@ -145,7 +146,7 @@ export default {
 
     },
 
-    
+
   }
 }
 </script>

@@ -73,7 +73,6 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // baseURL: 'http://192.168.0.61:5200',
     proxy: true,
     headers: {
       'App-Id': 'miniq',

@@ -22,7 +22,7 @@ export default {
         .then(res => {
           if (res.status === 200) {
             if (res.data.result.data) {
-              return res.data.result.data;
+              return res.data.result;
             }
           }
         })
