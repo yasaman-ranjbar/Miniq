@@ -17,8 +17,8 @@
     <template v-slot:item="row" >
       <tr>
         <td>
-          <v-icon :color="row.item.is_correct === '1' ? 'light-green accent-4' : 'red accent-4'">
-            {{ row.item.is_correct === '1' ? 'mdi-check-circle' : 'mdi-close-circle'}}
+          <v-icon :color="row.item.is_correct == '1' ? 'light-green accent-4' : 'red accent-4'">
+            {{ row.item.is_correct == '1' ? 'mdi-check-circle' : 'mdi-close-circle'}}
           </v-icon>
         </td>
         <td>{{row.item.text}}</td>
@@ -95,7 +95,7 @@ export default {
         text: this.form.text,
         is_correct: this.form.is_correct,
         Question_Id : this.Question_Id,
-        voice_file: this.form.voice_file,
+        voice_file: '',
         id : this.form.id,
       })
         .then(res => {

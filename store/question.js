@@ -11,7 +11,6 @@ export default {
       let formData = new FormData();
       formData.append("text", payload.text);
       formData.append("category_id", payload.category_id);
-      formData.append("voice_file", payload.voice_file);
 
       return this.$axios({
         url: `api/admin/questions/create`,

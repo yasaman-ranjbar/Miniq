@@ -99,7 +99,7 @@ export default {
         text: this.form.text,
         id: this.form.id,
         category_id: this.category_id,
-        voice_file: this.form.voice_file
+        voice_file: ''
       })
         .then(res => {
           if (res) {

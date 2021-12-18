@@ -23,7 +23,6 @@ export default {
       let formData = new FormData();
       formData.append("text", payload.text);
       formData.append("is_correct", payload.is_correct);
-      formData.append("voice_file", payload.voice_file);
 
       return this.$axios({
         url: `api/admin/answers/create/${payload.Question_Id}`,
