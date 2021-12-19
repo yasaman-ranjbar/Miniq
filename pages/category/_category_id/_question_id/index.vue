@@ -99,6 +99,7 @@ export default {
         text: this.form.text,
         is_correct: this.form.is_correct,
         Question_Id : this.Question_Id,
+        voice_file: '',
         id : this.form.id,
       })
         .then(res => {
