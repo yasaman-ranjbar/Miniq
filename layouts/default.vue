@@ -74,6 +74,13 @@
       <v-spacer />
 
       <template>
+        <div class="ml-4">
+            {{ this.$auth.user.fullname }} عزیز خوش آمدید
+        </div>
+      </template>
+         
+
+      <template>
         <div class="text-center">
           <v-menu offset-y>
             <template v-slot:activator="{ attrs, on }">
@@ -122,6 +129,7 @@ export default {
   middleware:'isLogin',
   data () {
     return {
+      userName: '',
       clipped: false,
       drawer: false,
       fixed: false,
@@ -158,7 +166,15 @@ export default {
   methods:{
     logout() {
       this.$auth.logout()
-    }
+    },
+
+    user() {
+        return this.$auth.$storage.getUniversal('user');
+      }
+  },
+
+  created() {
+    this.user();
   }
 }
 </script>

@@ -21,7 +21,7 @@
               </template>
             </v-select>
           </v-col>
-          <v-col cols="3">
+          <v-col md="3" >
             <v-radio-group
               v-model="form.type"
               row
@@ -40,14 +40,14 @@
         <v-row
           align="center"
         >
-          <v-col cols="4">
+          <v-col  md="4" sm="12">
             <v-date-picker
               v-model="form.date"
               color="pink"
             >
             </v-date-picker>
           </v-col>
-          <v-col cols="4">
+          <v-col  md="4" sm="12">
             <v-time-picker
               v-model="form.time"
               use-seconds

@@ -20,11 +20,7 @@
       <template v-slot:item="row" >
         <tr>
           <td>{{row.item.text}}</td>
-          <td>
-            <v-icon @click="playSound(row.item.voice)" color="red accent-3">
-              mdi-arrow-right-drop-circle
-            </v-icon>
-          </td>
+           <td><v-icon @click="playVoice(row.item.voice)" color="red accent-3">mdi-arrow-right-drop-circle</v-icon></td>
           <td>
             <v-icon @click="deleteQuestion(row.item.id)" color="red accent-3">mdi-delete</v-icon>
             <v-icon @click="goEdit(row.item.id)" color="light-blue accent-2">mdi-pencil</v-icon>
@@ -74,6 +70,7 @@ export default {
         text:'',
         voice_file: '',
       },
+      voice:'',
       category_id: this.$route.params.category_id,
       loading:false,
       category_Name: '',
@@ -88,6 +85,7 @@ export default {
     this.questionsList();
     this.showCategory();
   },
+<<<<<<< HEAD
 
   watch: {
     page() {
@@ -95,6 +93,14 @@ export default {
     }
   },
 
+=======
+  
+  watch: {
+    page() {
+      this.categoryList();
+    }
+  },
+>>>>>>> afa4e07dfcea23d643f2798139f9c8acd5421019
 
   methods:{
     createQuestion() {
@@ -103,7 +109,11 @@ export default {
         text: this.form.text,
         id: this.form.id,
         category_id: this.category_id,
+<<<<<<< HEAD
         voice_file: ''
+=======
+        voice_file: this.form.voice_file
+>>>>>>> afa4e07dfcea23d643f2798139f9c8acd5421019
       })
         .then(res => {
           if (res) {
@@ -156,8 +166,12 @@ export default {
         })
     },
 
+<<<<<<< HEAD
     playSound (voice) {
       console.log(voice)
+=======
+    playVoice(voice) {
+>>>>>>> afa4e07dfcea23d643f2798139f9c8acd5421019
       const audio = new Audio(voice)
       audio.play();
     }

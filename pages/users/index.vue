@@ -42,7 +42,12 @@
       </v-form>
     </v-card-text>
   </v-card>
-  <v-data-table class="mt-4" :headers="headers" :items="lists" hide-default-footer>
+  <v-data-table class="mt-4" 
+                :headers="headers" 
+                :items="lists" 
+                hide-default-footer
+                :items-per-page="15"
+  >
     <template v-slot:item="row" >
       <tr>
         <td> {{row.item.fullname}}</td>
@@ -127,7 +132,11 @@ export default {
         page: this.page
       })
       .then(res=> {
+<<<<<<< HEAD
         this.lists = res.data;
+=======
+        this.lists = res.data
+>>>>>>> afa4e07dfcea23d643f2798139f9c8acd5421019
         this.last_page = res.last_page
       })
     },

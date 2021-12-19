@@ -10,7 +10,6 @@ export default {
         method: "get"
       })
         .then(res => {
-          console.log(res);
           if (res.data.status) {
             return res.data.result
           }
@@ -23,7 +22,7 @@ export default {
     create({ commit }, payload) {
       let formData = new FormData();
       formData.append("text", payload.text);
-      formData.append("is_correct", payload.is_correct);
+      formData.append("is_correct", payload.is_correct)
 
       return this.$axios({
         url: `api/admin/answers/create/${payload.Question_Id}`,
@@ -34,7 +33,6 @@ export default {
         }
       })
         .then(res => {
-          console.log(res)
           if (res.status === 200) {
             if (res.data.result) {
               return res.data.result;
@@ -59,26 +57,6 @@ export default {
         },
       })
         .then(res => {
-          console.log(res)
-          if (res.status === 200) {
-            if (res.data.result) {
-              return res.data.result;
-            }
-          }
-        })
-        .catch(err => {
-          return false;
-        });
-    },
-
-
-    delete({ commit }, payload) {
-      return this.$axios({
-        url: `/api/admin/answers/delete/${payload.Question_Id}/${payload.id}`,
-        method: "delete",
-      })
-        .then(res => {
-          console.log(res)
           if (res.status === 200) {
             if (res.data.result) {
               return res.data.result;
