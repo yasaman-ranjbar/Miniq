@@ -6,7 +6,7 @@
       :edit="edit"
       @addCategoryToList="createCategory"
     />
-    <v-data-table class="mt-4" :headers="headers" :items="lists" hide-default-footer>
+    <v-data-table class="mt-4" :headers="headers" :items="lists" hide-default-footer items-per-page="15">
       <template v-slot:item="row" >
         <tr>
           <td> <img :src="row.item.icon" alt="" width="50"></td>
