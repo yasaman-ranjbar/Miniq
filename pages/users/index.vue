@@ -132,11 +132,7 @@ export default {
         page: this.page
       })
       .then(res=> {
-<<<<<<< HEAD
         this.lists = res.data;
-=======
-        this.lists = res.data
->>>>>>> afa4e07dfcea23d643f2798139f9c8acd5421019
         this.last_page = res.last_page
       })
     },

@@ -85,22 +85,12 @@ export default {
     this.questionsList();
     this.showCategory();
   },
-<<<<<<< HEAD
 
   watch: {
     page() {
       this.questionsList();
     }
   },
-
-=======
-  
-  watch: {
-    page() {
-      this.categoryList();
-    }
-  },
->>>>>>> afa4e07dfcea23d643f2798139f9c8acd5421019
 
   methods:{
     createQuestion() {
@@ -109,11 +99,7 @@ export default {
         text: this.form.text,
         id: this.form.id,
         category_id: this.category_id,
-<<<<<<< HEAD
         voice_file: ''
-=======
-        voice_file: this.form.voice_file
->>>>>>> afa4e07dfcea23d643f2798139f9c8acd5421019
       })
         .then(res => {
           if (res) {
@@ -127,11 +113,21 @@ export default {
     },
 
     questionsList() {
-      this.$axios.$get(`/api/admin/questions/list/category/${this.category_id}/?page=${this.page}`)
-      .then( res=> {
-        this.questions = res.result.data
-        this.last_page = res.result.last_page
+      this.$store.dispatch('question/list',{
+        page: this.page,
+        category_id : this.category_id
       })
+      .then(res=> {
+        
+        this.questions = res.data;
+       this.last_page = res.last_page
+      })
+      // this.$axios.$get(`/api/admin/questions/list/category/${this.category_id}/?page=${this.page}`)
+      // .then( res=> {
+      //   this.page = this.page
+      //   this.questions = res.result.data
+      //   this.last_page = res.result.last_page
+      // })
     },
 
     deleteQuestion(id) {
@@ -166,12 +162,7 @@ export default {
         })
     },
 
-<<<<<<< HEAD
-    playSound (voice) {
-      console.log(voice)
-=======
     playVoice(voice) {
->>>>>>> afa4e07dfcea23d643f2798139f9c8acd5421019
       const audio = new Audio(voice)
       audio.play();
     }

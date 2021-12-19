@@ -23,15 +23,11 @@
             outlined
             dense
           ></v-file-input>
-<<<<<<< HEAD
 <!--          <v-switch-->
 <!--            v-model="form.is_correct"-->
 <!--            :label="form.is_correct ? 'پاسخ درست' : 'پاسخ اشتباه'"-->
 <!--          ></v-switch>-->
           <v-radio-group
-=======
-           <v-radio-group
->>>>>>> afa4e07dfcea23d643f2798139f9c8acd5421019
             v-model="form.is_correct"
             row
           >
@@ -44,13 +40,12 @@
               value="0"
             ></v-radio>
           </v-radio-group>
-<<<<<<< HEAD
-=======
+
           <!-- <v-switch
             v-model="form.is_correct"
             :label="form.is_correct ? 'پاسخ درست' : 'پاسخ اشتباه' "
           ></v-switch> -->
->>>>>>> afa4e07dfcea23d643f2798139f9c8acd5421019
+
 
         </v-col>
       </v-row>
@@ -70,12 +65,9 @@
 export default {
 
   props: {
-<<<<<<< HEAD
 
     form:{
-=======
-   form:{
->>>>>>> afa4e07dfcea23d643f2798139f9c8acd5421019
+
       type: Object,
       default: {
         is_correct : 0,

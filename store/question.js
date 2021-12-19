@@ -33,6 +33,27 @@ export default {
         });
     },
 
+    list({ commit} , payload) {
+      return this.$axios({
+        url:`/api/admin/questions/list/category/${payload.category_id}?page=${payload.page}`,
+        method: 'get',
+        data: {
+          category_id : payload.category_id,
+          page: payload.page
+        }
+      })
+        .then(res => {
+          if (res.status === 200) {
+            if (res.data.result.data) {
+              return res.data.result;
+            }
+          }
+        })
+        .catch(err => {
+          err.message
+        });
+    },
+
 
     show({ commit }, payload) {
       return this.$axios({
