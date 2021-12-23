@@ -38,23 +38,39 @@
       </template>
 
       <v-divider></v-divider>
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-          class="my-3"
+
+      <template v-for="(item, i) in menus">
+        <v-list-group
+          v-if="item.items"
+          :key="item.name"
+          :group="item.group"
+          :prepend-icon="item.icon"
         >
-          <v-list-item-action>
+          <v-list-item slot="activator" ripple="ripple" router exact >
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+        </v-list-group>
+        <v-subheader v-else-if="item.header" :key="i">
+          {{ item.header}}
+          </v-subheader>
+        <v-divider v-else-if="item.divider" :key="i"></v-divider>
+        <v-list-item
+          v-else
+          :to="item.href ? item.href : null"
+          :key="item.name"
+        >
+          <v-list-item-action v-if="item.icon">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-      </v-list>
+      </template>
+
     </v-navigation-drawer>
     <v-app-bar
       :clipped-left="clipped"
@@ -78,7 +94,7 @@
             {{ this.$auth.user.fullname }} عزیز خوش آمدید
         </div>
       </template>
-         
+
 
       <template>
         <div class="text-center">
@@ -133,26 +149,48 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
+      menus: [
+        { header: "داشبورد" },
         {
-          icon: 'mdi-apps',
-          title: 'داشبورد',
-          to: '/'
+          title: "داشبورد",
+          group: "داشبورد",
+          icon: "mdi-apps",
+          name: "Dashboard",
+          href: "/",
+        },
+        { divider: true },
+        { header: "مدیریت کاربران" },
+        {
+          title: "کاربران",
+          group: "کاربران",
+          icon: "mdi-account",
+          name: "users",
+          href: "/users",
+        },
+        { divider: true },
+        { header: "مدیریت سوالات و جواب ها" },
+        {
+          title: "دسته بندی ها",
+          group: "category",
+          name: "category",
+          icon: "mdi-book-multiple",
+          href: "/category",
         },
         {
-          icon: 'mdi-account',
-          title: 'مدیریت کاربران',
-          to: '/users'
+          title: "آپلود گروهی سوالات",
+          group: "question",
+          name: "upload",
+          icon: "mdi-cloud-upload",
+          href: "/category/upload",
         },
+        { divider: true },
+        { header: "تورنومنت" },
         {
-          icon: 'mdi-book-multiple',
-          title: 'دسته بندی ها',
-          to: '/category'
-        },
-        {
-          icon: 'mdi-account-group',
-          title: 'تورنومنت',
-          to: '/tornoment'
+          title: "افزودن تورنومنت",
+          group: "tornoment",
+          name: "tornoment",
+          icon: "mdi-account-group",
+          href: "/tornoment",
         },
       ],
       miniVariant: false,

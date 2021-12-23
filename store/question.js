@@ -21,7 +21,6 @@ export default {
         }
       })
         .then(res => {
-          console.log(res)
           if (res.status === 200) {
             if (res.data.result) {
               return res.data.result;

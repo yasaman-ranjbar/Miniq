@@ -6,7 +6,12 @@
       :edit="edit"
       @addCategoryToList="createCategory"
     />
-    <v-data-table class="mt-4" :headers="headers" :items="lists" hide-default-footer items-per-page="15">
+    <v-data-table class="mt-4"
+                  :headers="headers"
+                  :items="lists"
+                  hide-default-footer
+                  :items-per-page="itemPage"
+    >
       <template v-slot:item="row" >
         <tr>
           <td> <img :src="row.item.icon" alt="" width="50"></td>
@@ -43,7 +48,7 @@ export default {
       form : {
         name: '',
         description: '',
-        icon: '',
+        icon: [],
       },
       edit: false,
       loading: false,
@@ -75,6 +80,8 @@ export default {
 
       page: 1,
       last_page: 0,
+
+      itemPage: 15,
     }
   },
 

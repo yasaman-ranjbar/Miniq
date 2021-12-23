@@ -43,7 +43,7 @@ export default {
       type: Object,
       default: {
         text: '',
-        voice_file: '',
+        voice_file: [],
       },
     },
     edit:{

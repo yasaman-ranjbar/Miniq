@@ -45,7 +45,7 @@ export default {
       form:{
         is_correct: false, // default: true or false
         text: '',
-        voice_file: '',
+        voice_file: [],
       },
 
       voice: '',

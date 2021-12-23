@@ -5,7 +5,16 @@
       color="pink darken-1"
       dark
     >
-      <img :src="category_Icon" alt="" width="30">  {{ category_Name }}
+      <v-row align="center">
+        <v-col class="grow">
+          <img :src="category_Icon" alt="" width="30">  {{ category_Name }}
+        </v-col>
+        <v-col class="shrink">
+          <v-btn @click="createQuestion">
+            ثبت سوال
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-alert>
 
     <Questions
@@ -16,7 +25,12 @@
       @createQuestion="createQuestion"
     />
 
-    <v-data-table class="mt-4" :headers="headers" :items="questions"  hide-default-footer>
+    <v-data-table class="mt-4"
+      :headers="headers"
+      :items="questions"
+      hide-default-footer
+      :items-per-page = "itemPages"
+    >
       <template v-slot:item="row" >
         <tr>
           <td>{{row.item.text}}</td>
@@ -68,7 +82,7 @@ export default {
       questions:[],
       form: {
         text:'',
-        voice_file: '',
+        voice_file: [],
       },
       voice:'',
       category_id: this.$route.params.category_id,
@@ -78,6 +92,7 @@ export default {
 
       page: 1,
       last_page: 0,
+      itemPages: 15,
     }
   },
 
@@ -118,16 +133,10 @@ export default {
         category_id : this.category_id
       })
       .then(res=> {
-        
+
         this.questions = res.data;
        this.last_page = res.last_page
       })
-      // this.$axios.$get(`/api/admin/questions/list/category/${this.category_id}/?page=${this.page}`)
-      // .then( res=> {
-      //   this.page = this.page
-      //   this.questions = res.result.data
-      //   this.last_page = res.result.last_page
-      // })
     },
 
     deleteQuestion(id) {
@@ -165,6 +174,10 @@ export default {
     playVoice(voice) {
       const audio = new Audio(voice)
       audio.play();
+    },
+
+    createQuestion() {
+      this.$router.push({ name: 'category-category_id-create'})
     }
   }
 }

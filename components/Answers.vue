@@ -72,7 +72,7 @@ export default {
       default: {
         is_correct : 0,
         text: '',
-        voice_file: '',
+        voice_file: [],
       },
     },
 

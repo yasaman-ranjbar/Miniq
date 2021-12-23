@@ -39,7 +39,7 @@ export default {
     list({ commit} , payload) {
       return this.$axios({
         url: `api/admin/categories/list?page=${payload.page}`,
-        method: "get"
+        method: "get",
       })
         .then(res => {
           if (res.status === 200) {
