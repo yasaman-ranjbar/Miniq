@@ -2,6 +2,14 @@
   <v-card>
     <v-card-title class="my-5">
      آپلود فایل
+      <v-btn
+        class="mr-5"
+        small
+        color="pink"
+        href="/example.xlsx"
+      >
+        دانلود فایل نمونه
+      </v-btn>
     </v-card-title>
     <v-card-text>
       <v-form @submit.prevent="uploadQuestion">
@@ -85,9 +93,9 @@ export default {
 
   methods: {
     uploadQuestion() {
-      // console.log(this.form.date + " " + this.form.time);
       this.$emit('uploadFile')
-    }
+    },
+
   }
 }
 </script>

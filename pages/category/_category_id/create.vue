@@ -5,33 +5,45 @@
       color="pink darken-1"
       dark
     >
-      <img :src="category_Icon" alt="" width="30">{{ category_Name }}
+      افزودن سوال تکی
+<!--      <img :src="category_Icon" alt="" width="30">{{ categoryForm.item.name }}-->
     </v-alert>
 
         <!--وارد کردن سوالات--------------------------------------------------------------->
       <v-row class="mt-5">
         <v-col cols="7" >
           <v-form @submit.prevent="createQuestion">
-            <v-text-field
-              label="سوال"
-              outlined
-              v-model="questionForm.text"
-              color="primary"
-            >
-            </v-text-field>
-            <v-col>
-              <v-btn
-                type="submit"
-                color="pink darken-1"
-                dark
-                large
-              >
-                ثبت سوال
-              </v-btn>
-            </v-col>
-          </v-form>
+                <v-select
+                  v-model="questionForm.value"
+                  :items="questionForm.item"
+                  item-text="name"
+                  item-value="id"
+                  label="انتخاب دسته بندی"
+                  outlined
+                >
+                  <template #selection="{ item }">
+                    <v-chip color="pink">{{item.name}}</v-chip>
+                  </template>
+                </v-select>
+                <v-text-field
+                  label="سوال"
+                  outlined
+                  v-model="questionForm.text"
+                  color="primary"
+                >
+                </v-text-field>
+                <v-btn
+                  type="submit"
+                  color="pink darken-1"
+                  dark
+                  large
+                >
+                  ثبت سوال
+                </v-btn>
+              </v-form>
 
-            <!----------------------------------------------------------------وارد کردن جوابها-->
+
+  <!----------------------------------------------------------------وارد کردن جوابها-->
           <v-row class="mt-5" v-if="question_id">
             <v-col cols="6">
               <v-form @submit.prevent="createForm">
@@ -67,7 +79,6 @@
                 >
                 </v-text-field>
               </v-form>
-
               <v-form @submit.prevent="createForm3">
                 <v-text-field
                   :value="form3.is_correct"
@@ -115,7 +126,6 @@
                 >
                 </v-text-field>
               </v-form>
-
               <v-form @submit.prevent="createForm7">
                 <v-text-field
                   :value="form7.is_correct"
@@ -128,6 +138,7 @@
                 </v-text-field>
               </v-form>
             </v-col>
+
             <v-btn
               @click="submit"
               color="pink darken-1"
@@ -138,37 +149,23 @@
             </v-btn>
           </v-row>
         </v-col>
-
-
-        <!--نمایش سوالات و جوابها--------------------------------------------------------------->
+<!--نمایش سوالات و جوابها--------------------------------------------------------------->
         <v-col cols="4">
-
           <v-card
             class="mx-auto"
             max-width="500"
             outlined
+            v-if="questionStatus"
           >
             <v-list-item three-line>
-              <v-avatar size="56">
-                <img
-                  alt="دسته بندی"
-                  :src="category_Icon"
-                >
-              </v-avatar>
               <v-list-item-content>
-                <p class="mb-4 mr-5 mt-5">
-                  {{ category_Name }}
-                </p>
-                <v-list-item-title v-if="questionStatus" class="mt-5">
+                <v-list-item-title  class="mt-5">
                   <p class="mb-4 mr-5 mt-5">
                     {{ questionForm.text }}
                   </p>
                 </v-list-item-title>
               </v-list-item-content>
-
-
             </v-list-item>
-
             <v-card-actions>
               <v-row>
                 <v-col cols="6">
@@ -247,6 +244,7 @@
                     {{ form7.text }}
                   </v-chip>
                 </v-col>
+
               </v-row>
             </v-card-actions>
           </v-card>
@@ -264,11 +262,14 @@ export default {
       questionStatus: false,
       category_Icon: '',
       category_Name: '',
-      category_id: this.$route.params.category_id,
+      // category_id: this.$route.params.category_id,
       question_id: '',
 
+
       questionForm: {
-        text: ''
+        text: '',
+        value : [],
+        item: [],
       },
 
       form: {
@@ -309,25 +310,24 @@ export default {
   },
 
   created() {
-    this.getCategory();
+    this.categoryList();
   },
 
   methods: {
-    getCategory() {
-      this.$store.dispatch('category/show', {
-        name: this.category_Name,
-        id: this.category_id,
+    categoryList() {
+      this.$store.dispatch('category/list' , {
+        page: this.questionForm.value,
       })
-        .then(res => {
-          this.category_Name = res.name;
-          this.category_Icon = res.icon;
+        .then(res=> {
+          this.questionForm.item = res.data
         })
     },
+
 
     createQuestion() {
       this.$store.dispatch('question/create' , {
         text: this.questionForm.text,
-        category_id: this.category_id
+        category_id: this.questionForm.value
       })
       .then( res  => {
         this.question_id = res.id

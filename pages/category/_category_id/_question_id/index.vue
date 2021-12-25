@@ -141,17 +141,17 @@ export default {
 
 
     deleteAnswers(id) {
-      this.$store.dispatch("answer/delete", {
-          Question_Id : this.id,
-          id: id
-      })
-        .then((res) => {
-          if (res) {
-            this.listAnswer({
-              page: this.page,
-            });
-          }
-        });
+      // this.$store.dispatch("answer/delete", {
+      //     Question_Id : this.id,
+      //     id: id
+      // })
+      //   .then((res) => {
+      //     if (res) {
+      //       this.listAnswer({
+      //         page: this.page,
+      //       });
+      //     }
+      //   });
       // this.$store.dispatch('question/delete', {
       //   Question_Id : this.Question_Id,
       //   id: this.form.id,
@@ -159,10 +159,10 @@ export default {
       //   .then (res => {
       //     this.lists.splice(res , 1);
       //   })
-      // this.$axios.delete(`/api/admin/answers/delete/${this.Question_Id}/${id}`)
-      //   .then( res => {
-      //     this.lists.splice(id , 1);
-      //   })
+      this.$axios.delete(`/api/admin/answers/delete/${this.Question_Id}/${id}`)
+        .then( res => {
+          this.lists.splice(id , 1);
+        })
     },
 
     goEdit(item) {
