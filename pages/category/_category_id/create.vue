@@ -10,246 +10,251 @@
     </v-alert>
 
         <!--وارد کردن سوالات--------------------------------------------------------------->
-      <v-row class="mt-5">
-        <v-col cols="7" >
-          <v-form @submit.prevent="createQuestion">
-                <v-select
-                  v-model="questionForm.value"
-                  :items="questionForm.item"
-                  item-text="name"
-                  item-value="id"
-                  label="انتخاب دسته بندی"
-                  outlined
-                >
-                  <template #selection="{ item }">
-                    <v-chip color="pink">{{item.name}}</v-chip>
-                  </template>
-                </v-select>
-                <v-text-field
-                  label="سوال"
-                  outlined
-                  v-model="questionForm.text"
-                  color="primary"
-                >
-                </v-text-field>
-                <v-btn
-                  type="submit"
-                  color="pink darken-1"
-                  dark
-                  large
-                >
-                  ثبت سوال
-                </v-btn>
-              </v-form>
+    <v-card>
+      <v-card-text>
+        <v-row class="mt-5">
+          <v-col cols="7" >
+            <v-form @submit.prevent="createQuestion">
+              <v-select
+                v-model="questionForm.value"
+                :items="questionForm.item"
+                item-text="name"
+                item-value="id"
+                label="انتخاب دسته بندی"
+                outlined
+              >
+                <template #selection="{ item }">
+                  <v-chip color="pink">{{item.name}}</v-chip>
+                </template>
+              </v-select>
+              <v-text-field
+                label="سوال"
+                outlined
+                v-model="questionForm.text"
+                color="primary"
+              >
+              </v-text-field>
+              <v-btn
+                type="submit"
+                color="pink darken-1"
+                dark
+                large
+              >
+                ثبت سوال
+              </v-btn>
+            </v-form>
 
 
-  <!----------------------------------------------------------------وارد کردن جوابها-->
-          <v-row class="mt-5" v-if="question_id">
-            <v-col cols="6">
-              <v-form @submit.prevent="createForm">
-                <v-text-field
-                  :value="form.is_correct"
-                  label="جواب درست"
-                  outlined
-                  v-model="form.text"
-                  color="green"
-                  prepend-inner-icon="mdi-check-bold"
-                >
-                </v-text-field>
-              </v-form>
-              <v-form @submit.prevent="createForm1">
-                <v-text-field
-                  :value="form1.is_correct"
-                  label="جواب اشتباه"
-                  outlined
-                  v-model="form1.text"
-                  color="red"
-                  prepend-inner-icon="mdi-close-thick"
-                >
-                </v-text-field>
-              </v-form>
-              <v-form @submit.prevent="createForm2">
-                <v-text-field
-                  :value="form2.is_correct"
-                  label="جواب اشتباه"
-                  outlined
-                  v-model="form2.text"
-                  color="red"
-                  prepend-inner-icon="mdi-close-thick"
-                >
-                </v-text-field>
-              </v-form>
-              <v-form @submit.prevent="createForm3">
-                <v-text-field
-                  :value="form3.is_correct"
-                  label="جواب اشتباه"
-                  outlined
-                  v-model="form3.text"
-                  color="red"
-                  prepend-inner-icon="mdi-close-thick"
-                >
-                </v-text-field>
-              </v-form>
-            </v-col>
-
-            <v-col cols="6">
-              <v-form @submit.prevent="createForm4">
-                <v-text-field
-                  :value="form4.is_correct"
-                  label="جواب اشتباه"
-                  outlined
-                  v-model="form4.text"
-                  color="red"
-                  prepend-inner-icon="mdi-close-thick"
-                >
-                </v-text-field>
-              </v-form>
-              <v-form @submit.prevent="createForm5">
-                <v-text-field
-                  :value="form5.is_correct"
-                  label="جواب اشتباه"
-                  outlined
-                  v-model="form5.text"
-                  color="red"
-                  prepend-inner-icon="mdi-close-thick"
-                >
-                </v-text-field>
-              </v-form>
-              <v-form @submit.prevent="createForm6">
-                <v-text-field
-                  :value="form6.is_correct"
-                  label="جواب اشتباه"
-                  outlined
-                  v-model="form6.text"
-                  color="red"
-                  prepend-inner-icon="mdi-close-thick"
-                >
-                </v-text-field>
-              </v-form>
-              <v-form @submit.prevent="createForm7">
-                <v-text-field
-                  :value="form7.is_correct"
-                  label="جواب اشتباه"
-                  outlined
-                  v-model="form7.text"
-                  color="red"
-                  prepend-inner-icon="mdi-close-thick"
-                >
-                </v-text-field>
-              </v-form>
-            </v-col>
-
-            <v-btn
-              @click="submit"
-              color="pink darken-1"
-              dark
-              large
-            >
-              ثبت جواب
-            </v-btn>
-          </v-row>
-        </v-col>
-<!--نمایش سوالات و جوابها--------------------------------------------------------------->
-        <v-col cols="4">
-          <v-card
-            class="mx-auto"
-            max-width="500"
-            outlined
-            v-if="questionStatus"
-          >
-            <v-list-item three-line>
-              <v-list-item-content>
-                <v-list-item-title  class="mt-5">
-                  <p class="mb-4 mr-5 mt-5">
-                    {{ questionForm.text }}
-                  </p>
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-card-actions>
-              <v-row>
-                <v-col cols="6">
-                  <v-chip
-                    dark
-                    v-if="form.text"
+            <!----------------------------------------------------------------وارد کردن جوابها-->
+            <v-row class="mt-5" v-if="question_id">
+              <v-col cols="6">
+                <v-form @submit.prevent="createForm">
+                  <v-text-field
+                    :value="form.is_correct"
+                    label="جواب درست"
+                    outlined
                     v-model="form.text"
-                    class="ma-2"
-                    color="green darken-3"
+                    color="green"
+                    prepend-inner-icon="mdi-check-bold"
                   >
-                    {{ form.text }}
-                  </v-chip>
-                  <v-chip
-                    dark
-                    v-if="form1.text"
+                  </v-text-field>
+                </v-form>
+                <v-form @submit.prevent="createForm1">
+                  <v-text-field
+                    :value="form1.is_correct"
+                    label="جواب اشتباه"
+                    outlined
                     v-model="form1.text"
-                    class="ma-2"
-                    color="red darken-4"
+                    color="red"
+                    prepend-inner-icon="mdi-close-thick"
                   >
-                    {{ form1.text }}
-                  </v-chip>
-                  <v-chip
-                    dark
-                    v-if="form2.text"
+                  </v-text-field>
+                </v-form>
+                <v-form @submit.prevent="createForm2">
+                  <v-text-field
+                    :value="form2.is_correct"
+                    label="جواب اشتباه"
+                    outlined
                     v-model="form2.text"
-                    class="ma-2"
-                    color="red darken-4"
+                    color="red"
+                    prepend-inner-icon="mdi-close-thick"
                   >
-                    {{ form2.text }}
-                  </v-chip>
-                  <v-chip
-                    dark
-                    v-if="form3.text"
+                  </v-text-field>
+                </v-form>
+                <v-form @submit.prevent="createForm3">
+                  <v-text-field
+                    :value="form3.is_correct"
+                    label="جواب اشتباه"
+                    outlined
                     v-model="form3.text"
-                    class="ma-2"
-                    color="red darken-4"
+                    color="red"
+                    prepend-inner-icon="mdi-close-thick"
                   >
-                    {{ form3.text }}
-                  </v-chip>
-                </v-col>
-                <v-col cols="6">
-                  <v-chip
-                    dark
-                    v-if="form4.text"
-                    v-model="form4.text"
-                    class="ma-2"
-                    color="red darken-4"
-                  >
-                    {{ form4.text }}
-                  </v-chip>
-                  <v-chip
-                    dark
-                    v-if="form5.text"
-                    v-model="form5.text"
-                    class="ma-2"
-                    color="red darken-4"
-                  >
-                    {{ form5.text }}
-                  </v-chip>
-                  <v-chip
-                    dark
-                    v-if="form6.text"
-                    v-model="form6.text"
-                    class="ma-2"
-                    color="red darken-4"
-                  >
-                    {{ form6.text }}
-                  </v-chip>
-                  <v-chip
-                    dark
-                    v-if="form7.text"
-                    v-model="form7.text"
-                    class="ma-2"
-                    color="red darken-4"
-                  >
-                    {{ form7.text }}
-                  </v-chip>
-                </v-col>
+                  </v-text-field>
+                </v-form>
+              </v-col>
 
-              </v-row>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
+              <v-col cols="6">
+                <v-form @submit.prevent="createForm4">
+                  <v-text-field
+                    :value="form4.is_correct"
+                    label="جواب اشتباه"
+                    outlined
+                    v-model="form4.text"
+                    color="red"
+                    prepend-inner-icon="mdi-close-thick"
+                  >
+                  </v-text-field>
+                </v-form>
+                <v-form @submit.prevent="createForm5">
+                  <v-text-field
+                    :value="form5.is_correct"
+                    label="جواب اشتباه"
+                    outlined
+                    v-model="form5.text"
+                    color="red"
+                    prepend-inner-icon="mdi-close-thick"
+                  >
+                  </v-text-field>
+                </v-form>
+                <v-form @submit.prevent="createForm6">
+                  <v-text-field
+                    :value="form6.is_correct"
+                    label="جواب اشتباه"
+                    outlined
+                    v-model="form6.text"
+                    color="red"
+                    prepend-inner-icon="mdi-close-thick"
+                  >
+                  </v-text-field>
+                </v-form>
+                <v-form @submit.prevent="createForm7">
+                  <v-text-field
+                    :value="form7.is_correct"
+                    label="جواب اشتباه"
+                    outlined
+                    v-model="form7.text"
+                    color="red"
+                    prepend-inner-icon="mdi-close-thick"
+                  >
+                  </v-text-field>
+                </v-form>
+              </v-col>
+
+              <v-btn
+                @click="submit"
+                color="pink darken-1"
+                dark
+                large
+              >
+                ثبت جواب
+              </v-btn>
+            </v-row>
+          </v-col>
+          <!--نمایش سوالات و جوابها--------------------------------------------------------------->
+          <v-col cols="4">
+            <v-card
+              class="mx-auto"
+              max-width="500"
+              outlined
+              v-if="questionStatus"
+            >
+              <v-list-item three-line>
+                <v-list-item-content>
+                  <v-list-item-title  class="mt-5">
+                    <p class="mb-4 mr-5 mt-5">
+                      {{ questionForm.text }}
+                    </p>
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-card-actions>
+                <v-row>
+                  <v-col cols="6">
+                    <v-chip
+                      dark
+                      v-if="form.text"
+                      v-model="form.text"
+                      class="ma-2"
+                      color="green darken-3"
+                    >
+                      {{ form.text }}
+                    </v-chip>
+                    <v-chip
+                      dark
+                      v-if="form1.text"
+                      v-model="form1.text"
+                      class="ma-2"
+                      color="red darken-4"
+                    >
+                      {{ form1.text }}
+                    </v-chip>
+                    <v-chip
+                      dark
+                      v-if="form2.text"
+                      v-model="form2.text"
+                      class="ma-2"
+                      color="red darken-4"
+                    >
+                      {{ form2.text }}
+                    </v-chip>
+                    <v-chip
+                      dark
+                      v-if="form3.text"
+                      v-model="form3.text"
+                      class="ma-2"
+                      color="red darken-4"
+                    >
+                      {{ form3.text }}
+                    </v-chip>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-chip
+                      dark
+                      v-if="form4.text"
+                      v-model="form4.text"
+                      class="ma-2"
+                      color="red darken-4"
+                    >
+                      {{ form4.text }}
+                    </v-chip>
+                    <v-chip
+                      dark
+                      v-if="form5.text"
+                      v-model="form5.text"
+                      class="ma-2"
+                      color="red darken-4"
+                    >
+                      {{ form5.text }}
+                    </v-chip>
+                    <v-chip
+                      dark
+                      v-if="form6.text"
+                      v-model="form6.text"
+                      class="ma-2"
+                      color="red darken-4"
+                    >
+                      {{ form6.text }}
+                    </v-chip>
+                    <v-chip
+                      dark
+                      v-if="form7.text"
+                      v-model="form7.text"
+                      class="ma-2"
+                      color="red darken-4"
+                    >
+                      {{ form7.text }}
+                    </v-chip>
+                  </v-col>
+
+                </v-row>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+
 
 
   </div>

@@ -1,15 +1,14 @@
 export default {
-
-
   actions: {
+
     create({commit}, payload) {
       return this.$axios({
-        url: `api/admin/tournaments/create`,
+        url: `api/admin/companies/create`,
         method: "post",
         data: {
-          start_time: payload.start_time,
-          type: payload.type,
-          category_ids: payload.category_ids
+          name: payload.name,
+          link: payload.link,
+          description: payload.description
         },
       })
         .then(res => {
@@ -22,32 +21,15 @@ export default {
         .catch(err => err.data);
     },
 
-    list({ commit} , payload) {
-      return this.$axios({
-        url: `api/admin/tournaments/list?page=${payload.page}`,
-        method: "get"
-      })
-        .then(res => {
-          if (res.status === 200) {
-            if (res.data.result.data) {
-              return res.data.result;
-
-            }
-          }
-        })
-        .catch(err => {
-          err.message
-        });
-    },
-
     update({ commit }, payload) {
       return this.$axios({
-        url: `/api/admin/tournaments/edit/${payload.id}`,
+        url: `/api/admin/companies/edit/${payload.id}`,
         method: "put",
         data: {
-          start_time: payload.start_time,
-          type: payload.type,
-          category_ids: payload.category_ids
+          id: payload.id,
+          name: payload.name,
+          link: payload.link,
+          description: payload.description
         },
       })
         .then(res => {
@@ -62,5 +44,25 @@ export default {
         });
     },
 
+
+    list({ commit} , payload) {
+      return this.$axios({
+        url:`/api/admin/companies/list?page=${payload.page}`,
+        method: 'get',
+        data: {
+          page: payload.page
+        }
+      })
+        .then(res => {
+          if (res.status === 200) {
+            if (res.data.result.data) {
+              return res.data.result;
+            }
+          }
+        })
+        .catch(err => {
+          err.message
+        });
+    },
   }
 }
