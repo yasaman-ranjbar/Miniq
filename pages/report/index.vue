@@ -15,7 +15,7 @@
         <td>{{row.item.total_group_game_count}}</td>
         <td>{{row.item.group_game_count}}</td>
         <td>{{row.item.total_charge_gift_count}}</td>
-        <td>{{row.item.ode_gift_count}}</td>
+        <td>{{row.item.code_gift_count}}</td>
         <td>{{row.item.report_date}}</td>
       </tr>
     </template>
@@ -74,7 +74,7 @@ export default {
           align: 'right',
         },
         {
-          text: 'ode',
+          text: 'code',
           value: '',
           align: 'right',
         },

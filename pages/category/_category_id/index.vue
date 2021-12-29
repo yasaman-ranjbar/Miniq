@@ -18,11 +18,12 @@
     </v-alert>
 
     <Questions
+      v-if="edit"
       :form="form"
       :category_id="category_id"
       :loading="loading"
       :edit="edit"
-      @createQuestion="createQuestion"
+      @editQuestion="editQuestion"
     />
 
     <v-data-table class="mt-4"
@@ -37,7 +38,7 @@
            <td><v-icon @click="playVoice(row.item.voice)" color="red accent-3">mdi-arrow-right-drop-circle</v-icon></td>
           <td>
             <v-icon @click="deleteQuestion(row.item.id)" color="red accent-3">mdi-delete</v-icon>
-            <v-icon @click="goEdit(row.item.id)" color="light-blue accent-2">mdi-pencil</v-icon>
+            <v-icon @click="goEdit(row.item)" color="light-blue accent-2">mdi-pencil</v-icon>
             <v-icon @click="addAnswer(row.item.id)" color="light-green accent-4">mdi-plus-circle</v-icon>
           </td>
         </tr>
@@ -108,13 +109,12 @@ export default {
   },
 
   methods:{
-    createQuestion() {
-      this.loading = true
-      this.$store.dispatch( this.edit ? 'question/update' : 'question/create' ,{
+    editQuestion(id) {
+      this.edit = true;
+      this.$store.dispatch('question/update' , {
         text: this.form.text,
-        id: this.form.id,
-        category_id: this.category_id,
-        voice_file: ''
+        voice_file: this.form.voice_file,
+        id: this.form.id
       })
         .then(res => {
           if (res) {
@@ -124,8 +124,25 @@ export default {
             this.loading = false;
           }
         });
-      this.form.text = '';
+          this.form = '';
     },
+    // createQuestion() {
+    //   this.loading = true
+    //   this.$store.dispatch( this.edit ? 'question/update' : 'question/create' ,{
+    //     text: this.form.text,
+    //     id: this.form.id,
+    //     category_id: this.category_id,
+    //   })
+    //     .then(res => {
+    //       if (res) {
+    //         this.loading = false;
+    //         this.questionsList();
+    //       } else {
+    //         this.loading = false;
+    //       }
+    //     });
+    //   this.form.text = '';
+    // },
 
     questionsList() {
       this.$store.dispatch('question/list',{
@@ -162,13 +179,9 @@ export default {
         })
     },
 
-    goEdit(id) {
+    goEdit(item) {
       this.edit = true
-      this.$axios.$get(`/api/admin/questions/show/${id}`)
-        .then( res => {
-          // console.log(res)
-          this.form = res.result
-        })
+      this.form = item
     },
 
     playVoice(voice) {

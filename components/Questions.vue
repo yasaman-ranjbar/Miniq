@@ -1,11 +1,11 @@
 <template>
   <v-card>
     <v-card-title>
-      افزودن سوال
+      ویرایش سوال
     </v-card-title>
 
     <v-card-text>
-      <v-form @submit.prevent="addQuestion">
+      <v-form @submit.prevent="editQuestion">
         <v-text-field
           label="سوال"
           outlined
@@ -24,7 +24,8 @@
           :loading="loading"
           color="pink"
         >
-          {{ edit ? editBtn : addBtn}}
+        ویرایش
+          <!-- {{ edit ? editBtn : addBtn}} -->
         </v-btn>
 
       </v-form>
@@ -39,17 +40,13 @@
 export default {
 
   props: {
-    form:{
-      type: Object,
-      default: {
-        text: '',
-        voice_file: [],
-      },
-    },
+    form:{},
+
     edit:{
       type:Boolean,
       default: false
     },
+
     category_id:'',
     loading:false
   },
@@ -62,8 +59,8 @@ export default {
   },
 
   methods: {
-    addQuestion() {
-      this.$emit('createQuestion')
+    editQuestion() {
+      this.$emit('editQuestion')
     }
   }
 }

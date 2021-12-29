@@ -14,7 +14,7 @@ export default {
           group_game_count: payload.group_game_count,
           total_charge_gift_count: payload.total_charge_gift_count,
           total_code_gift_count: payload.total_charge_gift_count,
-          ode_gift_count: payload.ode_gift_count,
+          code_gift_count: payload.ode_gift_count,
           report_date: payload.report_date,
         }
       })

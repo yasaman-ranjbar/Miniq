@@ -57,14 +57,7 @@ export default {
 
   props: {
 
-        form:{
-          type: Object,
-          default: {
-            name: '',
-            description: '',
-            icon: [],
-          }
-        },
+        form:{},
 
       edit:{
         type:Boolean,

@@ -19,7 +19,7 @@
           <td>{{row.item.description}}</td>
           <td>
             <v-icon @click="deleteList(row.item.id)" color="red accent-3">mdi-delete</v-icon>
-            <v-icon @click="goEdit(row.item.id)" color="light-blue accent-2">mdi-pencil</v-icon>
+            <v-icon @click="goEdit(row.item)" color="light-blue accent-2">mdi-pencil</v-icon>
             <v-icon @click="addQuestion(row.item.id)" color="light-green accent-4">mdi-plus-circle</v-icon>
           </td>
         </tr>
@@ -144,13 +144,9 @@ export default {
       })
       },
 
-    goEdit(id) {
+    goEdit(item) {
       this.edit = true
-      this.$axios.$get(`/api/admin/categories/show/${id}`)
-        .then( res => {
-          this.form = res.result
-        })
-
+      this.form = item
     },
 
 
