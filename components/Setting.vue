@@ -1,11 +1,11 @@
 <template>
-  <v-card>
+    <v-card>
     <v-card-title>
-      افزودن پاسخ
+      ورژن بازی
     </v-card-title>
 
     <v-card-text>
-      <v-form @submit.prevent="createAnswer">
+      <v-form @submit.prevent="createVersion">
 
       <v-row>
         <v-col
@@ -13,20 +13,20 @@
           sm="6"
         >
           <v-text-field
-            v-model="form.text"
-            label=" وارد کرن پاسخ "
+            v-model="form.version_code"
+            label=" کد ورژن "
             outlined
           ></v-text-field>
           <v-radio-group
-            v-model="form.is_correct"
+            v-model="form.is_force"
             row
           >
             <v-radio
-              label="پاسخ درست"
+              label="روشن"
               value="1"
             ></v-radio>
             <v-radio
-              label="پاسخ اشتباه"
+              label="خاموش"
               value="0"
             ></v-radio>
           </v-radio-group>
@@ -37,7 +37,7 @@
           type="submit"
           color="pink"
         >
-          {{ edit ? editBtn : addBtn}}
+         افزودن
         </v-btn>
       </v-form>
     </v-card-text>
@@ -46,35 +46,22 @@
 
 <script>
 export default {
+    props: {
 
-  props: {
-
-    form:{
-    },
-
-    edit:{
-      type:Boolean,
-      default: false
-    },
-
+    form:{},
     loading:false
   },
 
-  data () {
-    return {
-      editBtn : 'ویرایش' ,
-      addBtn : 'افزودن',
-    }
-  },
 
   methods: {
-    createAnswer() {
-      this.$emit('addAnswer')
+    createVersion() {
+      this.$emit('addVersion')
     }
   }
+
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>

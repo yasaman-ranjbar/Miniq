@@ -42,23 +42,49 @@
       </v-form>
     </v-card-text>
   </v-card>
-  <v-data-table class="mt-4" 
-                :headers="headers" 
-                :items="lists" 
+  <v-data-table class="mt-4"
+                :headers="headers"
+                :items="lists"
                 hide-default-footer
                 :items-per-page="15"
   >
-    <template v-slot:item="row" >
-      <tr>
-        <td> {{row.item.fullname}}</td>
-        <td>{{row.item.mobile}}</td>
-        <td>{{row.item.rank}}</td>
-        <td>
-          <v-icon @click="goEdit(row.item)" color="light-blue accent-2">mdi-pencil</v-icon>
-          <v-icon @click="showProfile(row.item)" color="pink">mdi-eye-check</v-icon>
-        </td>
-      </tr>
-    </template>
+          <template v-slot:item="row" >
+            <tr class="text-center">
+              <td> {{row.item.id}}</td>
+              <td> {{row.item.avatar}}</td>
+              <td> {{row.item.fullname}}</td>
+              <td>{{row.item.mobile}}</td>
+              <td>{{row.item.created_at}}</td>
+              <td>{{row.item.rank}}</td>
+              <td>
+                  <v-chip
+                    class="ma-2"
+                    color="teal accent-3"
+                    text-color="black"
+                  >
+                    {{row.item.elixir}}
+                  </v-chip>
+              </td>
+              <td>
+                <v-chip
+                      class="ma-2"
+                      color="light-blue lighten-3"
+                      text-color="black"
+                    >
+                  {{row.item.gem}}
+                </v-chip>
+              </td>
+              <td>
+                <!-- <v-icon @click="goEdit(row.item)" color="light-blue accent-2">mdi-pencil</v-icon> -->
+                <v-icon @click="showProfile(row.item)" color="light-green accent-2">mdi-eye-check</v-icon>
+              </td>
+              <td>
+               <v-icon @click="baneUser(row.item)" color="blue-grey lighten-2">
+                 mdi-account-cancel
+               </v-icon>
+              </td>
+            </tr>
+          </template>
   </v-data-table>
   <div>
     <v-pagination
@@ -68,6 +94,30 @@
       :total-visible="7"
     ></v-pagination>
   </div>
+
+      <v-snackbar
+        v-if="baneMessage"
+        :timeout="1000"
+        :value="true"
+        absolute
+        centered
+        top
+        tile
+        color="red accent-2"
+      >
+        اکانت بسته شد
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            color="white"
+            text
+            v-bind="attrs"
+            @click="snackbar = false"
+          >
+            بستن
+          </v-btn>
+        </template>
+      </v-snackbar>
+
 </div>
 </template>
 
@@ -78,24 +128,54 @@ export default {
     return {
       headers: [
         {
+          text: 'شناسه ',
+          value: '',
+          align:'center',
+        },
+        {
+          text: 'آواتار ',
+          value: '',
+          align:'center',
+        },
+        {
           text: 'نام ',
           value: '',
-          align:'right',
+          align:'center',
         },
         {
           text: 'شماره موبایل',
           value: '',
-          align:'right',
+          align:'center',
+        },
+        {
+          text: 'تاریخ ساخت یوزر',
+          value: '',
+          align:'center',
         },
         {
           text: 'امتیاز کاربر',
           value: '',
-          align:'right',
+          align:'center',
         },
         {
-          text: 'ویرایش',
+          text: 'اکسیر',
           value: '',
-          align:'right',
+          align:'center',
+        },
+        {
+          text: 'الماس',
+          value: '',
+          align:'center',
+        },
+        {
+          text: 'نمایش جزییات',
+          value: '',
+          align:'center',
+        },
+        {
+          text: 'بستن اکانت',
+          value: '',
+          align:'center',
         },
       ],
 
@@ -112,6 +192,8 @@ export default {
       loading: false,
 
       userId : '' ,
+
+      baneMessage: false,
 
     }
   },
@@ -161,6 +243,13 @@ export default {
 
     showProfile(id) {
       this.$router.push(`users/${id.id}`)
+    },
+
+    baneUser(id) {
+      this.$axios.$get(`api/admin/users/show/${id.id}/toggle_active`)
+      .then(res => {
+        this.baneMessage = true;
+      })
     }
   }
 }

@@ -1,7 +1,4 @@
 export default {
-  state() {
-    return {}
-  },
 
   actions: {
     list({ commit }, payload) {

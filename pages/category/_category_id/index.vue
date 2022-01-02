@@ -114,6 +114,7 @@ export default {
       this.$store.dispatch('question/update' , {
         text: this.form.text,
         voice_file: this.form.voice_file,
+        category_id: this.category_id,
         id: this.form.id
       })
         .then(res => {

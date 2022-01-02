@@ -6,7 +6,6 @@
       dark
     >
       افزودن سوال تکی
-<!--      <img :src="category_Icon" alt="" width="30">{{ categoryForm.item.name }}-->
     </v-alert>
 
         <!--وارد کردن سوالات--------------------------------------------------------------->
@@ -150,6 +149,10 @@
                 ثبت جواب
               </v-btn>
             </v-row>
+
+
+          
+
           </v-col>
           <!--نمایش سوالات و جوابها--------------------------------------------------------------->
           <v-col cols="4">
@@ -174,11 +177,11 @@
                     <v-chip
                       dark
                       v-if="form.text"
-                      v-model="form.text"
+                      v-model ="form.text"
                       class="ma-2"
                       color="green darken-3"
                     >
-                      {{ form.text }}
+                      {{form.text}}
                     </v-chip>
                     <v-chip
                       dark
@@ -198,6 +201,8 @@
                     >
                       {{ form2.text }}
                     </v-chip>
+                  </v-col>
+                  <v-col cols="6">
                     <v-chip
                       dark
                       v-if="form3.text"
@@ -207,8 +212,6 @@
                     >
                       {{ form3.text }}
                     </v-chip>
-                  </v-col>
-                  <v-col cols="6">
                     <v-chip
                       dark
                       v-if="form4.text"
@@ -264,6 +267,9 @@
 export default {
   data() {
     return {
+
+
+
       questionStatus: false,
       category_Icon: '',
       category_Name: '',
@@ -338,7 +344,9 @@ export default {
         this.question_id = res.id
         this.questionStatus = true
       })
+      
     },
+
 
     submit() {
       if (this.form.text && this.form1.text && this.form2.text && this.form3.text) {
@@ -361,94 +369,119 @@ export default {
       if (this.form7.text) {
         this.createForm7();
       }
+      this.questionForm = ""
     },
     createForm() {
-      // console.log(this.form)
-      this.$store.dispatch('answer/create',{
-        text: this.form.text,
-        is_correct: this.form.is_correct,
-        Question_Id : this.question_id
+      this.$store.dispatch('answerGroup/create',{
+        answers: {
+          text: this.form.text,
+          is_correct: this.form.is_correct,
+        },
+         Question_Id : this.question_id
       })
       .then(({data})=> {
-        console.log(data)
+        
       })
+      this.form = ""
     },
 
     createForm1() {
-      this.$store.dispatch('answer/create',{
-        text: this.form1.text,
-        is_correct: this.form1.is_correct,
-        Question_Id : this.question_id
+      this.$store.dispatch('answerGroup/create',{
+         answers: {
+          text: this.form1.text,
+          is_correct: this.form1.is_correct,
+         },
+         Question_Id : this.question_id
       })
         .then(({data})=> {
-          console.log(data)
+          
         })
+        this.form1 = ""
     },
 
     createForm2() {
-      this.$store.dispatch('answer/create',{
+      this.$store.dispatch('answerGroup/create',{
+         answers: {
         text: this.form2.text,
         is_correct: this.form2.is_correct,
-        Question_Id : this.question_id
+        
+         },
+         Question_Id : this.question_id
       })
         .then(({data})=> {
-          console.log(data)
+          
         })
+        this.form2 = ""
     },
 
     createForm3() {
-      this.$store.dispatch('answer/create',{
+      this.$store.dispatch('answerGroup/create',{
+         answers: {
         text: this.form3.text,
         is_correct: this.form3.is_correct,
-        Question_Id : this.question_id
+        
+         },
+         Question_Id : this.question_id
       })
         .then(({data})=> {
-          console.log(data)
         })
+        this.form3 = ""
     },
 
     createForm4() {
-      this.$store.dispatch('answer/create',{
+      this.$store.dispatch('answerGroup/create',{
+         answers: {
         text: this.form4.text,
         is_correct: this.form4.is_correct,
-        Question_Id : this.question_id
+        
+         },
+         Question_Id : this.question_id
       })
         .then(({data})=> {
-          console.log(data)
         })
+        this.form4 = ""
     },
 
     createForm5() {
-      this.$store.dispatch('answer/create',{
+      this.$store.dispatch('answerGroup/create',{
+         answers: {
         text: this.form5.text,
         is_correct: this.form5.is_correct,
-        Question_Id : this.question_id
+        
+         },
+         Question_Id : this.question_id
       })
         .then(({data})=> {
-          console.log(data)
         })
+        this.form5 = ""
     },
 
     createForm6() {
-      this.$store.dispatch('answer/create',{
+      this.$store.dispatch('answerGroup/create',{
+         answers: {
         text: this.form6.text,
         is_correct: this.form6.is_correct,
-        Question_Id : this.question_id
+        
+         },
+         Question_Id : this.question_id
       })
         .then(({data})=> {
-          console.log(data)
         })
+        this.form6 = ""
     },
 
     createForm7() {
-      this.$store.dispatch('answer/create',{
+      this.$store.dispatch('answerGroup/create',{
+         answers: {
         text: this.form7.text,
         is_correct: this.form7.is_correct,
-        Question_Id : this.question_id
+        
+         },
+         Question_Id : this.question_id
       })
         .then(({data})=> {
-          console.log(data)
         })
+        this.form7 = ""
     },
 
   }

@@ -10,6 +10,9 @@ export default {
       let formData = new FormData();
       formData.append("text", payload.text);
       formData.append("category_id", payload.category_id);
+      if(payload.voice_file) {
+        formData.append("voice_file", payload.voice_file);
+      }
 
       return this.$axios({
         url: `api/admin/questions/create`,
@@ -70,14 +73,21 @@ export default {
     },
 
     update({ commit }, payload) {
+      let formData = new FormData();
+      formData.append("text", payload.text);
+      formData.append("category_id", payload.category_id);
+      
+      if(payload.voice_file) {
+        formData.append("voice_file", payload.voice_file);
+      }
+
       return this.$axios({
         url: `/api/admin/questions/edit/${payload.id}`,
         method: "put",
-        data: {
-          text: payload.text,
-          id: payload.id,
-          voice_file: payload.voice_file
-        },
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       })
         .then(res => {
           if (res.status === 200) {

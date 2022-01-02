@@ -4,6 +4,7 @@
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
+      mini-variant-width="100"
       fixed
       app
       right
@@ -147,7 +148,7 @@ export default {
     return {
       userName: '',
       clipped: false,
-      drawer: false,
+      drawer: true,
       fixed: false,
       menus: [
         { header: "داشبورد" },
@@ -235,6 +236,15 @@ export default {
           name: "report",
           icon: "mdi-chart-bar",
           href: "/report",
+        },
+        { divider: true },
+        { header: "تنظیمات" },
+        {
+          title: "ورژن بازی",
+          group: "setting",
+          name: "setting",
+          icon: "mdi-cog-outline",
+          href: "/setting",
         },
       ],
       miniVariant: false,

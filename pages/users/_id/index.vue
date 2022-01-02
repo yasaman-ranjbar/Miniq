@@ -1,126 +1,267 @@
 <template>
   <div>
-    <v-card
-      class="mx-auto"
-    >
+    <v-card class="mx-auto">
       <v-card-title>اطلاعات کاربر</v-card-title>
 
+      <v-row v-if="users">
+        <v-col cols="4">
+          <v-card class="ma-5 py-3" outlined>
+            <v-list-item three-line>
+              <v-list-item-avatar tile size="80">
+                <v-img
+                  :src="users.avatar"
+                ></v-img>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title class="mb-1">
+                  نام کاربر: {{ users.fullname }}
+                </v-list-item-title>
+                <v-list-item-title class="mb-1">
+                  شماره موبایل: {{ users.mobile }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-card>
 
-        <v-row v-if="users">
-          <v-col cols="4">
-            <v-card
-              class="ma-5"
-              outlined
-            >
-              <v-list-item three-line>
-                <v-list-item-avatar
-                  tile
-                  size="80"
-                >
-                  <v-img :src="users.avatar = null ? 'img' : 'users.avatar'"></v-img>
-                </v-list-item-avatar>
-                <v-list-item-content>
-                  <v-list-item-title class="mb-1">
-                    نام کاربر: {{ users.fullname }}
-                  </v-list-item-title>
-                  <v-list-item-title class="mb-1">
-                    شماره موبایل: {{ users.mobile }}
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-card>
-          </v-col>
+          <v-card class="ma-5" flat>
+            <v-btn  block color="pink" @click="resultUser">
+               نمایش لیست نتایج کاربر
+            </v-btn>
+          </v-card>
+        </v-col>
 
-          <v-col cols="4">
-            <v-card
-              class="ma-5"
-              outlined
-            >
-              <v-row>
-                <v-col class="my-10" cols="6" align="center">
-                  <v-img :src="temp[0].elixirImage" width="30"></v-img>
-                  <span>اکسیر : {{ users.elixir }} </span>
-                </v-col>
-                <v-col class="my-10" cols="6" align="center">
-                  <v-img :src="temp[0].gemImage" width="30"></v-img>
-                  <span> الماس : {{ users.gem }}</span>
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-col>
+        <v-col cols="4">
+          <v-card class="ma-5" outlined>
+            <v-row>
+              <v-col class="my-10" cols="6" align="center">
+                <v-img :src="temp[0].elixirImage" width="30"></v-img>
+                <span>اکسیر : {{ users.elixir }} </span>
+              </v-col>
+              <v-col class="my-10" cols="6" align="center">
+                <v-img :src="temp[0].gemImage" width="30"></v-img>
+                <span> الماس : {{ users.gem }}</span>
+              </v-col>
+            </v-row>
+          </v-card>
 
-          <v-col cols="4">
-            <v-card
-              class="ma-5"
-              outlined
-            >
-              <v-row>
-                <v-col cols="12" class="mt-5" align="center">
-                  امتیاز کاربر: {{ users.rank }}
-                </v-col>
-                <v-col cols="12" class="mb-5" align="center">
-                  <v-rating
-                    align="center"
-                    v-model="temp[0].rating"
-                    background-color="pink lighten-3"
-                    color="pink"
-                    large
-                  ></v-rating>
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-col>
-        </v-row>
+          <v-card class="ma-5" flat>
+            <v-btn  block color="pink" @click="discount">
+               نمایش لیست کد تخفیف کاربر
+            </v-btn>
+          </v-card>
+        </v-col>
 
+        <v-col cols="4">
+          <v-card class="ma-5" outlined>
+            <v-row>
+              <v-col cols="12" class="mt-5" align="center">
+                امتیاز کاربر: {{ users.rank }}
+              </v-col>
+              <v-col cols="12" class="mb-5" align="center">
+                <v-rating
+                  align="center"
+                  v-model="temp[0].rating"
+                  background-color="pink lighten-3"
+                  color="pink"
+                  large
+                ></v-rating>
+              </v-col>
+            </v-row>
+          </v-card>
+          <v-card class="ma-4" flat>
+            <v-btn block color="pink" @click="giftCard">
+             نمایش لیست شارژ کاربر
+            </v-btn>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-card>
-    <!--  <Profile-->
-    <!--    :mobile="mobile"-->
-    <!--    :fullname="fullname"-->
-    <!--    :avatar="avatar"-->
-    <!--    :elixir="elixir"-->
-    <!--    :gem="gem"-->
-    <!--    :rank="rank"-->
-    <!--  />-->
+
+    <!--لیست نتایج کاربران----------------------------------------------------------------->
+    <template v-if="showResult">
+      <v-simple-table class="mt-6">
+        <template v-slot:default>
+          <thead>
+          <tr>
+            <th class="text-center">آیکون</th>
+            <th class="text-center">دسته بندی</th>
+            <th class="text-center">تعداد سوالات درست</th>
+            <th class="text-center">تعداد سوالات اشتباه</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="item in lists" :key="item.name">
+            <td class="text-center">
+              <img :src="item.category_icon" alt="" width="30"/>
+            </td>
+            <td class="text-center">{{ item.category_name }}</td>
+            <td class="text-center">
+              <v-chip
+                class="ma-2"
+                color="green"
+                text-color="black"
+              >
+                {{ item.true_count }}
+              </v-chip>
+            </td>
+            <td class="text-center">
+              <v-chip
+                class="ma-2"
+                color="red"
+                text-color="white"
+              >
+                {{ item.false_count }}
+              </v-chip>
+            </td>
+          </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+    </template>
+    <!--لیست کد تخفیف کاربران----------------------------------------------------------------->
+    <template v-if="showCode">
+      <v-simple-table class="mt-6">
+        <template v-slot:default>
+          <thead>
+          <tr>
+            <th class="text-center">کد تخفیف</th>
+            <th class="text-center">لینک وب سایت</th>
+            <th class="text-center">توضیحات</th>
+            <th class="text-center">تاریخ انقضا</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="item in code" :key="item.code">
+            <td class="text-center">{{ item.code }}</td>
+            <td class="text-center">{{ item.link }}</td>
+            <td class="text-center">{{ item.description }}</td>
+            <td class="text-center">{{ item.expired_at }}</td>
+          </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+    </template>
+    <!--لیست شارژ کاربران----------------------------------------------------------------->
+    <template v-if="showCharge">
+      <v-simple-table class="mt-6">
+        <template v-slot:default>
+          <thead>
+          <tr>
+            <th class="text-center">id</th>
+            <th class="text-center">user_id</th>
+            <th class="text-center">amount</th>
+            <th class="text-center">operator</th>
+            <th class="text-center">transaction_id</th>
+            <th class="text-center">tracking_number</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="item in code" :key="item.code">
+            <td class="text-center">{{ item.id }}</td>
+            <td class="text-center">{{ item.user_id }}</td>
+            <td class="text-center">{{ item.amount }}</td>
+            <td class="text-center">{{ item.operator }}</td>
+            <td class="text-center">{{ item.transaction_id }}</td>
+            <td class="text-center">{{ item.tracking_number }}</td>
+          </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+    </template>
+
   </div>
 </template>
-
 <script>
 export default {
-  name: "index",
+  name: 'index',
 
   data() {
     return {
       ids: {
-        user_id: this.$route.params.id
+        user_id: this.$route.params.id,
       },
-      img: require('@/assets/images/user-avatar.png') ,
-      users: {},
+      img: require('@/assets/images/user-avatar.png'),
+      users: [],
       temp: [
         {
           rating: 4,
           elixirImage: require(`@/assets/images/exir.png`),
-          gemImage: require('@/assets/images/gem.png')
-        }
-      ]
+          gemImage: require('@/assets/images/gem.png'),
+        },
+      ],
+
+      lists: [],
+      code: [],
+      charge: [],
+
+      page: 1,
+      last_page: 0,
+
+      showResult: false,
+      showCode: false,
+      showCharge: false,
     }
   },
 
   created() {
-    this.getUser();
+    this.getDiscountCodeList();
   },
 
   methods: {
     getUser() {
-      this.$axios.$get(`api/admin/users/show/${this.ids.user_id}`)
-        .then(res => {
-          this.users = res.result;
+      this.$axios
+        .$get(`api/admin/users/show/${this.ids.user_id}`)
+        .then((res) => {
+          this.users = res.result
+          this.lists = res.result.result
         })
     },
-  }
+
+    getDiscountCodeList() {
+      this.$axios
+        .$get(`api/admin/users/show/${this.ids.user_id}/code/list`)
+        .then(res => {
+          this.code = res.data
+        })
+    },
+
+    getChargeList() {
+      this.$axios
+        .$get(`api/admin/users/show/${this.ids.user_id}/charge/list`)
+        .then(res => {
+            this.charge = res.data
+        })
+    },
+
+    resultUser() {
+      this.showResult = !this.showResult;
+      if (this.showCode || this.showCharge) {
+        this.showCode = false
+        this.showCharge = false
+      }
+      setTimeout(this.getUser, 1)
+    },
+
+    discount() {
+      this.showCode = !this.showCode;
+      if (this.showResult || this.showCharge) {
+        this.showResult = false
+        this.showCharge = false
+      }
+      setTimeout(this.getDiscountCodeList, 1)
+    },
+
+    giftCard() {
+      this.showCharge = !this.showCharge;
+      if (this.showResult || this.showCode) {
+        this.showResult = false
+        this.showCode = false
+      }
+      setTimeout(this.getChargeList, 1)
+    },
+  },
 }
 </script>
 
 <style scoped>
-
-
 </style>

@@ -22,7 +22,6 @@
           </v-icon>
         </td>
         <td>{{row.item.text}}</td>
-        <td><v-icon @click="playSound( row.item.voice )" color="red accent-3">mdi-arrow-right-drop-circle</v-icon></td>
         <td>
           <v-icon @click="deleteAnswers(row.item.id)" color="red accent-3">mdi-delete</v-icon>
           <v-icon @click="goEdit(row.item)" color="light-blue accent-2">mdi-pencil</v-icon>
@@ -45,10 +44,8 @@ export default {
       form:{
         is_correct: false, // default: true or false
         text: '',
-        voice_file: [],
       },
 
-      voice: '',
       loading:false,
 
       id: this.$route.params.question_id,
@@ -61,11 +58,6 @@ export default {
         },
         {
           text: 'جواب ها',
-          value: '',
-          align:'right',
-        },
-        {
-          text: 'پخش صدا',
           value: '',
           align:'right',
         },
@@ -99,7 +91,6 @@ export default {
         text: this.form.text,
         is_correct: this.form.is_correct,
         Question_Id : this.Question_Id,
-        voice_file: '',
         id : this.form.id,
       })
         .then(res => {
@@ -171,7 +162,6 @@ export default {
     },
 
     playSound (voice) {
-      console.log(voice)
       const audio = new Audio(voice)
       audio.play();
     }

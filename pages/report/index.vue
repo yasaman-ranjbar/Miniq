@@ -8,15 +8,15 @@
   >
     <template v-slot:item="row" >
       <tr>
-        <td>{{row.item.register_count}}</td>
-        <td>{{row.item.total_register_count}}</td>
-        <td>{{row.item.total_solo_game_count}}</td>
-        <td>{{row.item.solo_game_count}}</td>
-        <td>{{row.item.total_group_game_count}}</td>
-        <td>{{row.item.group_game_count}}</td>
-        <td>{{row.item.total_charge_gift_count}}</td>
-        <td>{{row.item.code_gift_count}}</td>
-        <td>{{row.item.report_date}}</td>
+        <td class="text-center">{{row.item.register_count}}</td>
+        <td class="text-center">{{row.item.total_register_count}}</td>
+        <td class="text-center">{{row.item.total_solo_game_count}}</td>
+        <td class="text-center">{{row.item.solo_game_count}}</td>
+        <td class="text-center">{{row.item.total_group_game_count}}</td>
+        <td class="text-center">{{row.item.group_game_count}}</td>
+        <td class="text-center">{{row.item.total_charge_gift_count}}</td>
+        <td class="text-center">{{row.item.code_gift_count}}</td>
+        <td class="text-center">{{row.item.report_date}}</td>
       </tr>
     </template>
   </v-data-table>
@@ -39,49 +39,49 @@ export default {
     return {
       headers: [
         {
-          text: 'register count',
+          text: 'تعداد کاربران امروز',
           value: '',
-          align: 'right',
+          align: 'center',
         },
         {
-          text: 'total register',
+          text: 'جمع کاربران',
           value: '',
-          align: 'right',
+          align: 'center',
         },
         {
-          text: 'total solo game',
+          text: 'جمع کل بازی نفر به نفر',
           value: '',
-          align: 'right',
+          align: 'center',
         },
         {
-          text: ' solo game',
+          text: ' بازی نفر به نفر',
           value: '',
-          align: 'right',
+          align: 'center',
         },
         {
-          text: 'total group game',
+          text: 'جمع کل بازی گروهی',
           value: '',
-          align: 'right',
+          align: 'center',
         },
         {
-          text: 'game count',
+          text: 'بازی گروهی',
           value: '',
-          align: 'right',
+          align: 'center',
         },
         {
-          text: 'charge gift',
+          text: 'شارژ',
           value: '',
-          align: 'right',
+          align: 'center',
         },
         {
-          text: 'code',
+          text: 'کد تخفیف',
           value: '',
-          align: 'right',
+          align: 'center',
         },
         {
-          text: 'report date',
+          text: 'تاریخ',
           value: '',
-          align: 'right',
+          align: 'center',
         },
       ],
 
