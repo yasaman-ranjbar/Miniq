@@ -250,6 +250,7 @@ export default {
       .then(res => {
         this.baneMessage = true;
       })
+
     }
   }
 }

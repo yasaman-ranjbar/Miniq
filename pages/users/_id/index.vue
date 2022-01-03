@@ -1,11 +1,11 @@
 <template>
   <div>
-    <v-card class="mx-auto">
+    <v-card class="mx-auto" >
       <v-card-title>اطلاعات کاربر</v-card-title>
 
       <v-row v-if="users">
         <v-col cols="4">
-          <v-card class="ma-5 py-3" outlined>
+          <v-card class="ma-5 py-3" outlined >
             <v-list-item three-line>
               <v-list-item-avatar tile size="80">
                 <v-img
@@ -52,22 +52,24 @@
         </v-col>
 
         <v-col cols="4">
-          <v-card class="ma-5" outlined>
-            <v-row>
-              <v-col cols="12" class="mt-5" align="center">
-                امتیاز کاربر: {{ users.rank }}
-              </v-col>
-              <v-col cols="12" class="mb-5" align="center">
-                <v-rating
-                  align="center"
-                  v-model="temp[0].rating"
-                  background-color="pink lighten-3"
-                  color="pink"
-                  large
-                ></v-rating>
-              </v-col>
-            </v-row>
+          <v-card class="ma-5 py-3" outlined>
+            <v-list-item three-line>
+              <v-list-item-avatar tile size="80">
+                <v-img
+                  :src="users.avatar"
+                ></v-img>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title class="mb-1">
+                  تعداد بازی های برنده شده: {{ users.winner_count}}
+                </v-list-item-title>
+                <v-list-item-title class="mb-1">
+                  تعداد بازیهای باخته: {{ users.looser_count}}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
           </v-card>
+
           <v-card class="ma-4" flat>
             <v-btn block color="pink" @click="giftCard">
              نمایش لیست شارژ کاربر
@@ -221,7 +223,7 @@ export default {
       this.$axios
         .$get(`api/admin/users/show/${this.ids.user_id}/code/list`)
         .then(res => {
-          this.code = res.data
+          this.code = res.result.data
         })
     },
 
@@ -229,7 +231,7 @@ export default {
       this.$axios
         .$get(`api/admin/users/show/${this.ids.user_id}/charge/list`)
         .then(res => {
-            this.charge = res.data
+            this.charge = res.result.data
         })
     },
 

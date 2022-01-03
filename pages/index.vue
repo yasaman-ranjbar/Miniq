@@ -1,61 +1,45 @@
 <template>
     <div>
-          <v-card
-            class="mx-auto text-center no-gutters"
-            color="green"
-            dark
-            max-width="800"
-          >
-            <v-card-text>
-              <v-sheet color="rgba(0, 0, 0, .12)">
-                <v-sparkline
-                  :value="value"
-                  color="rgba(255, 255, 255, .7)"
-                  height="250"
-                  padding="24"
-                  stroke-linecap="round"
-                  smooth
-                  auto-draw
-                >
-                  <template v-slot:label="item">
-                   {{ item.value }}
-                  </template>
-                </v-sparkline>
-              </v-sheet>
-            </v-card-text>
 
-            <v-card-text>
-              <div class=" font-weight-thin">
-                تعداد کاربران
-              </div>
-            </v-card-text>
-
-            <v-divider></v-divider>
-
-            <v-card-actions class="justify-center">
-              <v-btn
-                block
-                text
-                to="/report"
-              >
-                گزارش کامل
-              </v-btn>
-            </v-card-actions>
-          </v-card>
+      <v-row>
+        <v-col
+          class="d-flex child-flex"
+          cols="6"
+        >
+          <TotalUser />
+        </v-col>
+        <v-col
+          class="d-flex child-flex"
+          cols="6"
+        >
+          <SoloGame />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col
+          class="d-flex child-flex"
+          cols="6"
+        >
+          <GroupGame />
+        </v-col>
+        <v-col
+          class="d-flex child-flex"
+          cols="6"
+        >
+        <Charge />
+        </v-col>
+      </v-row>
     </div>
 </template>
 <script>
+import TotalUser from "~/components/Chart/TotalUser";
+import SoloGame from "~/components/Chart/SoloGame";
+import GroupGame from "~/components/Chart/GroupGame";
+import Charge from "~/components/Chart/Charge";
 export default {
+  components: {Charge, GroupGame, SoloGame, TotalUser},
   data: () => ({
-    value: [
-      0,
-      53,
-      54,
-      54,
-      89,
-      128,
-      158
-    ],
+
   }),
 
   // created() {
