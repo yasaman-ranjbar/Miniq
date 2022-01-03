@@ -149,17 +149,15 @@
         <template v-slot:default>
           <thead>
           <tr>
-            <th class="text-center">id</th>
-            <th class="text-center">user_id</th>
-            <th class="text-center">amount</th>
-            <th class="text-center">operator</th>
-            <th class="text-center">transaction_id</th>
-            <th class="text-center">tracking_number</th>
+            <th class="text-center">شناسه کاربر</th>
+            <th class="text-center">مقدار شارژ</th>
+            <th class="text-center">اپراتور</th>
+            <th class="text-center">شناسه تراکنش</th>
+            <th class="text-center">شماره تراکنش</th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="item in code" :key="item.code">
-            <td class="text-center">{{ item.id }}</td>
+          <tr v-for="item in code" :key="item.charge">
             <td class="text-center">{{ item.user_id }}</td>
             <td class="text-center">{{ item.amount }}</td>
             <td class="text-center">{{ item.operator }}</td>
@@ -207,6 +205,7 @@ export default {
 
   created() {
     this.getDiscountCodeList();
+    this.getUser();
   },
 
   methods: {
