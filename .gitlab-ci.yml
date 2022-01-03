@@ -15,8 +15,8 @@ staging:
   - git stash
   - git pull origin tmaster
   - cd /opt/miniq-web
-  - export DOCKER_CLIENT_TIMEOUT=300
-  - export COMPOSE_HTTP_TIMEOUT=300
+  - export DOCKER_CLIENT_TIMEOUT=1200
+  - export COMPOSE_HTTP_TIMEOUT=1200
   - docker pull localhub.minimum.money/miniq/miniq-web:latest
   - docker-compose down && docker-compose up -d
   - sleep 5;docker-compose ps
@@ -44,6 +44,8 @@ production:
   - git stash
   - git pull origin master
   - cd /opt/miniq-web
+  - export DOCKER_CLIENT_TIMEOUT=1200
+  - export COMPOSE_HTTP_TIMEOUT=1200
   - docker pull remotehub.minimum.money/miniq/miniq-web:latest
   - docker-compose down && docker-compose up -d
   - sleep 5;docker-compose ps
