@@ -39,6 +39,18 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    ['nuxt-moment-jalaali', {
+      moment: {
+        defaultLocale: 'fa',
+        locales: ['fa'],
+        timezone: {
+          matchZones: ['Iran'],
+          startYear: 2000,
+          endYear: 2030
+        },
+        defaultTimezone: 'Asia/Tehran'
+      }
+    }]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

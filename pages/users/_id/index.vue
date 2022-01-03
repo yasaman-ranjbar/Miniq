@@ -52,22 +52,35 @@
         </v-col>
 
         <v-col cols="4">
-          <v-card class="ma-5 py-3" outlined>
-            <v-list-item three-line>
-              <v-list-item-avatar tile size="80">
-                <v-img
-                  :src="users.avatar"
-                ></v-img>
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title class="mb-1">
+          <v-card class="ma-5" outlined>
+            <v-row>
+              <v-col class="my-10" cols="6" align="center">
+                <v-chip
+                  class="ma-2 pa-5"
+                  text-color="white"
+                  color="green"
+                  label
+                >
+                  <v-icon left>
+                    mdi-thumb-up
+                  </v-icon>
                   تعداد بازی های برنده شده: {{ users.winner_count}}
-                </v-list-item-title>
-                <v-list-item-title class="mb-1">
+                </v-chip>
+              </v-col>
+              <v-col class="my-10" cols="6" align="center">
+                <v-chip
+                  class="ma-2 px-7 py-5"
+                  text-color="white"
+                  color="red"
+                  label
+                >
+                  <v-icon left>
+                    mdi-thumb-down
+                  </v-icon>
                   تعداد بازیهای باخته: {{ users.looser_count}}
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+                </v-chip>
+              </v-col>
+            </v-row>
           </v-card>
 
           <v-card class="ma-4" flat>
@@ -135,9 +148,9 @@
           <tbody>
           <tr v-for="item in code" :key="item.code">
             <td class="text-center">{{ item.code }}</td>
-            <td class="text-center">{{ item.link }}</td>
+            <td class="text-center"><a :href="`http://${item.link}}`" ></a> </td>
             <td class="text-center">{{ item.description }}</td>
-            <td class="text-center">{{ item.expired_at }}</td>
+            <td class="text-center">{{ $moment(item.expired_at).format('jYYYY/jM/jDD') }}</td>
           </tr>
           </tbody>
         </template>
@@ -149,6 +162,7 @@
         <template v-slot:default>
           <thead>
           <tr>
+            <th class="text-center">شناسه</th>
             <th class="text-center">شناسه کاربر</th>
             <th class="text-center">مقدار شارژ</th>
             <th class="text-center">اپراتور</th>
@@ -158,7 +172,7 @@
           </thead>
           <tbody>
           <tr v-for="item in charge" :key="item.charge">
-            <td class="text-center">{{ item.user_id }}</td>
+            <td class="text-center">{{ item.id }}</td>
             <td class="text-center">{{ item.amount }}</td>
             <td class="text-center">{{ item.operator }}</td>
             <td class="text-center">{{ item.transaction_id }}</td>

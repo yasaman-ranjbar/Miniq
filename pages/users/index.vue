@@ -5,6 +5,7 @@
      ویرایش کاربر
     </v-card-title>
     <v-card-text>
+
       <v-form  @submit.prevent="editUser">
         <v-row>
           <v-col
@@ -42,11 +43,19 @@
       </v-form>
     </v-card-text>
   </v-card>
+  <v-text-field
+    v-model="search"
+    append-icon="mdi-magnify"
+    label="جستجوی کاربر"
+    single-line
+    hide-details
+  ></v-text-field>
   <v-data-table class="mt-4"
                 :headers="headers"
                 :items="lists"
                 hide-default-footer
                 :items-per-page="15"
+                :search="search"
   >
           <template v-slot:item="row" >
             <tr class="text-center">
@@ -54,7 +63,7 @@
               <td> {{row.item.avatar}}</td>
               <td> {{row.item.fullname}}</td>
               <td>{{row.item.mobile}}</td>
-              <td>{{row.item.created_at}}</td>
+              <td>{{$moment(row.item.created_at).format('jYYYY/jM/jDD')}}</td>
               <td>{{row.item.rank}}</td>
               <td>
                   <v-chip
@@ -126,6 +135,7 @@ export default {
   name: "index",
   data() {
     return {
+      search: '',
       headers: [
         {
           text: 'شناسه ',
@@ -148,7 +158,7 @@ export default {
           align:'center',
         },
         {
-          text: 'تاریخ ساخت یوزر',
+          text: 'تاریخ ثبت یوزر',
           value: '',
           align:'center',
         },
