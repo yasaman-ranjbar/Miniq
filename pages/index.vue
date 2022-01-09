@@ -4,13 +4,15 @@
       <v-row>
         <v-col
           class="d-flex child-flex"
-          cols="6"
+          md="12"
+          sm="12"
         >
           <TotalUser />
         </v-col>
         <v-col
           class="d-flex child-flex"
-          cols="6"
+          md="12"
+          sm="12"
         >
           <SoloGame />
         </v-col>
@@ -18,13 +20,15 @@
       <v-row>
         <v-col
           class="d-flex child-flex"
-          cols="6"
+          md="12"
+          sm="12"
         >
           <GroupGame />
         </v-col>
         <v-col
           class="d-flex child-flex"
-          cols="6"
+          md="12"
+          sm="12"
         >
         <Charge />
         </v-col>

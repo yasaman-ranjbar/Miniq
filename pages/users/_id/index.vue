@@ -4,7 +4,7 @@
       <v-card-title>اطلاعات کاربر</v-card-title>
 
       <v-row v-if="users">
-        <v-col cols="4">
+        <v-col md="4">
           <v-card class="ma-5 py-3" outlined >
             <v-list-item three-line>
               <v-list-item-avatar tile size="80">
@@ -30,7 +30,7 @@
           </v-card>
         </v-col>
 
-        <v-col cols="4">
+        <v-col md="4">
           <v-card class="ma-5" outlined>
             <v-row>
               <v-col class="my-10" cols="6" align="center">
@@ -51,12 +51,12 @@
           </v-card>
         </v-col>
 
-        <v-col cols="4">
+        <v-col  md="4">
           <v-card class="ma-5" outlined>
             <v-row>
               <v-col class="my-10" cols="6" align="center">
                 <v-chip
-                  class="ma-2 pa-5"
+                  class="ma-2"
                   text-color="white"
                   color="green"
                   label
@@ -64,12 +64,12 @@
                   <v-icon left>
                     mdi-thumb-up
                   </v-icon>
-                  تعداد بازی های برنده شده: {{ users.winner_count}}
+                  تعداد بازی های برنده: {{ users.winner_count}}
                 </v-chip>
               </v-col>
               <v-col class="my-10" cols="6" align="center">
                 <v-chip
-                  class="ma-2 px-7 py-5"
+                  class="ma-2"
                   text-color="white"
                   color="red"
                   label
@@ -77,7 +77,7 @@
                   <v-icon left>
                     mdi-thumb-down
                   </v-icon>
-                  تعداد بازیهای باخته: {{ users.looser_count}}
+                  تعداد بازی های باخته: {{ users.looser_count}}
                 </v-chip>
               </v-col>
             </v-row>
@@ -148,7 +148,7 @@
           <tbody>
           <tr v-for="item in code" :key="item.code">
             <td class="text-center">{{ item.code }}</td>
-            <td class="text-center"><a :href="`http://${item.link}}`" ></a> </td>
+            <td class="text-center"><a :href="`http://${item.link}`" target="_blank" > {{ item.link }} </a> </td>
             <td class="text-center">{{ item.description }}</td>
             <td class="text-center">{{ $moment(item.expired_at).format('jYYYY/jM/jDD') }}</td>
           </tr>

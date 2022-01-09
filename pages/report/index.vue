@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-data-table class="mt-4"
+  <v-data-table class="mt-4 elevation-2"
                 :headers="headers"
                 :items="lists"
                 hide-default-footer
@@ -16,7 +16,7 @@
         <td class="text-center">{{row.item.group_game_count}}</td>
         <td class="text-center">{{row.item.total_charge_gift_count}}</td>
         <td class="text-center">{{row.item.code_gift_count}}</td>
-        <td class="text-center">{{row.item.report_date}}</td>
+        <td class="text-center">{{$moment(row.item.report_date).format('jYYYY/jM/jDD')}}</td>
       </tr>
     </template>
   </v-data-table>
@@ -42,46 +42,55 @@ export default {
           text: 'تعداد کاربران امروز',
           value: '',
           align: 'center',
+          width: '10px'
         },
         {
           text: 'جمع کاربران',
           value: '',
           align: 'center',
+          width: '10px'
         },
         {
           text: 'جمع کل بازی نفر به نفر',
           value: '',
           align: 'center',
+          width: '10px'
         },
         {
           text: ' بازی نفر به نفر',
           value: '',
           align: 'center',
+          width: '10px'
         },
         {
           text: 'جمع کل بازی گروهی',
           value: '',
           align: 'center',
+          width: '10px'
         },
         {
           text: 'بازی گروهی',
           value: '',
           align: 'center',
+          width: '10px'
         },
         {
           text: 'شارژ',
           value: '',
           align: 'center',
+          width: '10px'
         },
         {
           text: 'کد تخفیف',
           value: '',
           align: 'center',
+          width: '10px'
         },
         {
           text: 'تاریخ',
           value: '',
           align: 'center',
+          width: '10px'
         },
       ],
 
