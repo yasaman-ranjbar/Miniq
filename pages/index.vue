@@ -1,18 +1,25 @@
 <template>
     <div>
+      <v-row>
+        <v-col>
+          <LiveReport />
+        </v-col>
+      </v-row>
 
       <v-row>
         <v-col
           class="d-flex child-flex"
-          md="12"
+          md="6"
           sm="12"
+
         >
           <TotalUser />
         </v-col>
         <v-col
           class="d-flex child-flex"
-          md="12"
+          md="6"
           sm="12"
+
         >
           <SoloGame />
         </v-col>
@@ -20,15 +27,17 @@
       <v-row>
         <v-col
           class="d-flex child-flex"
-          md="12"
+          md="6"
           sm="12"
+
         >
           <GroupGame />
         </v-col>
         <v-col
           class="d-flex child-flex"
-          md="12"
+          md="6"
           sm="12"
+
         >
         <Charge />
         </v-col>
@@ -40,8 +49,9 @@ import TotalUser from "~/components/Chart/TotalUser";
 import SoloGame from "~/components/Chart/SoloGame";
 import GroupGame from "~/components/Chart/GroupGame";
 import Charge from "~/components/Chart/Charge";
+import LiveReport from "~/components/LiveReport";
 export default {
-  components: {Charge, GroupGame, SoloGame, TotalUser},
+  components: {LiveReport, Charge, GroupGame, SoloGame, TotalUser},
   data: () => ({
 
   }),

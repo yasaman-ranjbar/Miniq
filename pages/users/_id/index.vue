@@ -173,6 +173,7 @@
           <tbody>
           <tr v-for="item in charge" :key="item.charge">
             <td class="text-center">{{ item.id }}</td>
+            <td class="text-center">{{ item.user_id }}</td>
             <td class="text-center">{{ item.amount }}</td>
             <td class="text-center">{{ item.operator }}</td>
             <td class="text-center">{{ item.transaction_id }}</td>
