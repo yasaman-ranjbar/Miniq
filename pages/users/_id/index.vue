@@ -195,7 +195,7 @@ export default {
       ids: {
         user_id: this.$route.params.id,
       },
-      img: require('@/assets/images/user-avatar.png'),
+      img: require('~/static/user-avatar.png'),
       users: [],
       temp: [
         {

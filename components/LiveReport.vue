@@ -8,8 +8,8 @@
 
     <v-row class="mb-5">
       <v-col cols="4">تعداد بازی ها: {{ game_count }}</v-col>
-      <v-col cols="4">تعداد افراد اضافه شده : {{ user_join_count }}  </v-col>
-      <v-col cols="4">تعداد بازیکنان: {{ user_play_count }}  </v-col>
+      <v-col cols="4">تعداد افراد حاضر در بازی : {{ user_join_count }}  </v-col>
+      <v-col cols="4">تعداد افراد منتظر برای بازی: {{ user_play_count }}  </v-col>
     </v-row>
   </v-alert>
 

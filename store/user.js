@@ -8,7 +8,8 @@ export default {
   actions: {
     list({ commit} , payload) {
       return this.$axios({
-        url:`/api/admin/users/list?page=${payload.page}`,
+        // url:`/api/admin/users/list?${payload.search ? 'search='+payload.search+'&' : ''}page=${payload.page}`,
+        url: `/api/admin/users/list?page=${payload.page}`,
         method: 'get',
         data: {
           id : payload.id,

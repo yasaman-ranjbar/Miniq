@@ -46,18 +46,9 @@
 <script>
 export default {
   name: "GroupGame",
-
+  props:["value"],
   data: () => ({
-    value: [
-      0,
-      40,
-      40,
-      40,
-      41,
-      41,
-      44,
-      44,
-    ],
+
   })
 }
 </script>

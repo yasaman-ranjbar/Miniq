@@ -8,6 +8,7 @@
   >
     <template v-slot:item="row" >
       <tr>
+        <td class="text-center">{{$moment(row.item.report_date).format('jYYYY/jM/jDD')}}</td>
         <td class="text-center">{{row.item.register_count}}</td>
         <td class="text-center">{{row.item.total_register_count}}</td>
         <td class="text-center">{{row.item.total_solo_game_count}}</td>
@@ -16,7 +17,6 @@
         <td class="text-center">{{row.item.group_game_count}}</td>
         <td class="text-center">{{row.item.total_charge_gift_count}}</td>
         <td class="text-center">{{row.item.code_gift_count}}</td>
-        <td class="text-center">{{$moment(row.item.report_date).format('jYYYY/jM/jDD')}}</td>
       </tr>
     </template>
   </v-data-table>
@@ -38,6 +38,12 @@ export default {
   data() {
     return {
       headers: [
+        {
+          text: 'تاریخ',
+          value: '',
+          align: 'center',
+          width: '10px'
+        },
         {
           text: 'تعداد کاربران امروز',
           value: '',
@@ -86,12 +92,7 @@ export default {
           align: 'center',
           width: '10px'
         },
-        {
-          text: 'تاریخ',
-          value: '',
-          align: 'center',
-          width: '10px'
-        },
+
       ],
 
       page: 1,

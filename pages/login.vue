@@ -5,7 +5,6 @@
       <v-card-text>
         <div class="layout column align-center">
           <img src="~/assets/images/logo.jpg" width="150" />
-          <!-- <h2 class="flex pt-5">MobEx</h2> -->
         </div>
         <div class="mt-15">
             <Auth
@@ -45,7 +44,7 @@ export default {
         .dispatch("otp/otp", {
           mobile: this.form.mobile
         })
-        
+
         .then(res => {
           if (res) {
             this.loading = false;

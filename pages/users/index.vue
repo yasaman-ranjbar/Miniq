@@ -1,133 +1,138 @@
 <template>
-<div>
-  <v-card v-if="edit">
-    <v-card-title>
-     ویرایش کاربر
-    </v-card-title>
-    <v-card-text>
-
-      <v-form  @submit.prevent="editUser">
-        <v-row>
-          <v-col
-            cols="12"
-            sm="6"
-          >
-            <v-text-field
-              label=" نام کاربری"
-              outlined
-              v-model="form.fullname"
-              color="primary"
-            >
-            </v-text-field>
-          </v-col>
-          <v-col
-            cols="12"
-            sm="6"
-          >
-            <v-text-field
-              label="شماره موبایل"
-              outlined
-              v-model="form.mobile"
-              color="primary"
-            >
-            </v-text-field>
-          </v-col>
-        </v-row>
-        <v-btn
-          class="mt-3"
-          type="submit"
-          color="pink"
-        >
-          ویرایش
-        </v-btn>
-      </v-form>
-    </v-card-text>
-  </v-card>
-  <v-text-field
-    v-model="search"
-    append-icon="mdi-magnify"
-    label="جستجوی کاربر"
-    single-line
-    hide-details
-  ></v-text-field>
-  <v-data-table class="mt-4"
-                :headers="headers"
-                :items="lists"
-                hide-default-footer
-                :items-per-page="15"
-                :search="search"
-  >
-          <template v-slot:item="row" >
-            <tr class="text-center">
-              <td> {{row.item.id}}</td>
-              <td> {{row.item.avatar}}</td>
-              <td> {{row.item.fullname}}</td>
-              <td>{{row.item.mobile}}</td>
-              <td>{{$moment(row.item.created_at).format('jYYYY/jM/jDD')}}</td>
-              <td>{{row.item.rank}}</td>
-              <td>
-                  <v-chip
-                    class="ma-2"
-                    color="teal accent-3"
-                    text-color="black"
-                  >
-                    {{row.item.elixir}}
-                  </v-chip>
-              </td>
-              <td>
-                <v-chip
-                      class="ma-2"
-                      color="light-blue lighten-3"
-                      text-color="black"
-                    >
-                  {{row.item.gem}}
-                </v-chip>
-              </td>
-              <td>
-                <!-- <v-icon @click="goEdit(row.item)" color="light-blue accent-2">mdi-pencil</v-icon> -->
-                <v-icon @click="showProfile(row.item)" color="light-green accent-2">mdi-eye-check</v-icon>
-              </td>
-              <td>
-               <v-icon @click="baneUser(row.item)" color="blue-grey lighten-2">
-                 mdi-account-cancel
-               </v-icon>
-              </td>
-            </tr>
-          </template>
-  </v-data-table>
   <div>
-    <v-pagination
-      class="ma-4"
-      v-model="page"
-      :length="last_page"
-      :total-visible="7"
-    ></v-pagination>
-  </div>
+    <v-card v-if="edit">
+      <v-card-title>
+        ویرایش کاربر
+      </v-card-title>
+      <v-card-text>
 
-      <v-snackbar
-        v-if="baneMessage"
-        :timeout="1000"
-        :value="true"
-        absolute
-        centered
-        top
-        tile
-        color="red accent-2"
-      >
-        اکانت بسته شد
-        <template v-slot:action="{ attrs }">
+        <v-form @submit.prevent="editUser">
+          <v-row>
+            <v-col
+              cols="12"
+              sm="6"
+            >
+              <v-text-field
+                label=" نام کاربری"
+                outlined
+                v-model="form.fullname"
+                color="primary"
+              >
+              </v-text-field>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
+            >
+              <v-text-field
+                label="شماره موبایل"
+                outlined
+                v-model="form.mobile"
+                color="primary"
+              >
+              </v-text-field>
+            </v-col>
+          </v-row>
           <v-btn
-            color="white"
-            text
-            v-bind="attrs"
-            @click="snackbar = false"
+            class="mt-3"
+            type="submit"
+            color="pink"
           >
-            بستن
+            ویرایش
           </v-btn>
-        </template>
-      </v-snackbar>
+        </v-form>
+      </v-card-text>
+    </v-card>
+    <v-text-field
+      v-model="search"
+      append-icon="mdi-magnify"
+      label="جستجوی کاربر"
+      single-line
+      hide-details
+      @input="getUserList"
+    ></v-text-field>
+    <v-data-table class="mt-4"
+                  :headers="headers"
+                  :items="lists"
+                  hide-default-footer
+                  :items-per-page="15"
+    >
+      <template v-slot:item="row">
+        <tr class="text-center">
+          <td> {{ row.item.id }}</td>
+          <td>
+            <v-img
+              :src="row.item.avatar" alt="avatar"
+            ></v-img>
+          </td>
+          <td> {{ row.item.fullname }}</td>
+          <td>{{ row.item.mobile }}</td>
+          <td>{{ $moment(row.item.created_at).format('jYYYY/jM/jDD') }}</td>
+          <td>{{ row.item.rank }}</td>
+          <td>{{ row.item.current_app_version }}</td>
+          <td>
+            <v-chip
+              class="ma-2"
+              color="teal accent-3"
+              text-color="black"
+            >
+              {{ row.item.elixir }}
+            </v-chip>
+          </td>
+          <td>
+            <v-chip
+              class="ma-2"
+              color="light-blue lighten-3"
+              text-color="black"
+            >
+              {{ row.item.gem }}
+            </v-chip>
+          </td>
+          <td>
+            <!-- <v-icon @click="goEdit(row.item)" color="light-blue accent-2">mdi-pencil</v-icon> -->
+            <v-icon @click="showProfile(row.item)" color="light-green accent-2">mdi-eye-check</v-icon>
+          </td>
+          <td>
+            <v-icon @click="baneUser(row.item)" color="blue-grey lighten-2">
+              mdi-account-cancel
+            </v-icon>
+          </td>
+        </tr>
+      </template>
+    </v-data-table>
+    <div>
+      <v-pagination
+        class="ma-4"
+        v-model="page"
+        :length="last_page"
+        :total-visible="7"
+      ></v-pagination>
+    </div>
 
-</div>
+    <v-snackbar
+      v-if="baneMessage"
+      :timeout="1000"
+      :value="true"
+      absolute
+      centered
+      top
+      tile
+      color="red accent-2"
+    >
+      اکانت بسته شد
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          بستن
+        </v-btn>
+      </template>
+    </v-snackbar>
+
+  </div>
 </template>
 
 <script>
@@ -140,68 +145,73 @@ export default {
         {
           text: 'شناسه ',
           value: '',
-          align:'center',
+          align: 'center',
         },
         {
           text: 'آواتار ',
           value: '',
-          align:'center',
+          align: 'center',
         },
         {
           text: 'نام ',
           value: '',
-          align:'center',
+          align: 'center',
         },
         {
           text: 'شماره موبایل',
           value: '',
-          align:'center',
+          align: 'center',
         },
         {
           text: 'تاریخ ثبت یوزر',
           value: '',
-          align:'center',
+          align: 'center',
         },
         {
           text: 'امتیاز کاربر',
           value: '',
-          align:'center',
+          align: 'center',
+        },
+        {
+          text: 'ورژن بازی',
+          value: '',
+          align: 'center',
         },
         {
           text: 'اکسیر',
           value: '',
-          align:'center',
+          align: 'center',
         },
         {
           text: 'الماس',
           value: '',
-          align:'center',
+          align: 'center',
         },
         {
           text: 'نمایش جزییات',
           value: '',
-          align:'center',
+          align: 'center',
         },
         {
           text: 'بستن اکانت',
           value: '',
-          align:'center',
+          align: 'center',
         },
       ],
 
-      form:{
-        fullname:'',
-        mobile:'',
+      form: {
+        fullname: '',
+        mobile: '',
       },
 
       page: 1,
       last_page: 0,
 
-      lists: [] ,
+      lists: [],
       edit: false,
       loading: false,
 
-      userId : '' ,
+      userId: '',
 
       baneMessage: false,
 
@@ -218,15 +228,17 @@ export default {
     }
   },
 
+
   methods: {
-    getUserList(){
-      this.$store.dispatch('user/list',{
-        page: this.page
+    getUserList() {
+      this.$store.dispatch('user/list', {
+        page: this.page,
+        search: this.search
       })
-      .then(res=> {
-        this.lists = res.data;
-        this.last_page = res.last_page
-      })
+        .then(res => {
+          this.lists = res.data;
+          this.last_page = res.last_page
+        })
     },
 
     goEdit(item) {
@@ -235,7 +247,7 @@ export default {
     },
 
     editUser(id) {
-      this.$store.dispatch('user/update' , {
+      this.$store.dispatch('user/update', {
         fullname: this.form.fullname,
         mobile: this.form.mobile,
         id: this.form.id
@@ -248,7 +260,7 @@ export default {
             this.loading = false;
           }
         });
-          this.form = '';
+      this.form = '';
     },
 
     showProfile(id) {
@@ -257,9 +269,9 @@ export default {
 
     baneUser(id) {
       this.$axios.$get(`api/admin/users/show/${id.id}/toggle_active`)
-      .then(res => {
-        this.baneMessage = true;
-      })
+        .then(res => {
+          this.baneMessage = true;
+        })
 
     }
   }

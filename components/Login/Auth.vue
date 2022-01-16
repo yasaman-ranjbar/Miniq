@@ -1,14 +1,6 @@
 <template>
   <div>
     <v-form @submit.prevent="submit" v-model="valid">
-      <!-- <div class="mb-3">
-        <span
-          class="cursor-pointer"
-          @click="editNumber"
-          v-if="isActivationCodeSend"
-          >{{ editMobileText }}</span
-        >
-      </div> -->
 
       <v-text-field
         color="#ff3392"

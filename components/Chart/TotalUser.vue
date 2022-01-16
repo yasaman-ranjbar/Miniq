@@ -9,12 +9,14 @@
       <v-sheet color="rgba(0, 0, 0, .12)">
         <v-sparkline
           :value="value"
+          :labels="labels"
           color="white"
           height="100"
           padding="24"
           stroke-linecap="round"
           smooth
           auto-draw
+
         >
           <template v-slot:label="item">
             {{ item.value }}
@@ -46,17 +48,8 @@
 <script>
 export default {
   name: "TotalUser",
+    props:["value", "labels"],
     data: () => ({
-      value: [
-        0,
-        53,
-        54,
-        54,
-        89,
-        128,
-        158,
-        188,
-      ],
     })
 }
 </script>

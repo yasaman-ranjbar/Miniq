@@ -46,17 +46,8 @@
 <script>
 export default {
   name: "Charge",
+  props:["value"],
   data: () => ({
-    value: [
-      0,
-      8,
-      10,
-      23,
-      228,
-      795,
-      1325,
-      2239,
-    ],
   })
 }
 </script>

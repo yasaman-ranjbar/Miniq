@@ -46,17 +46,8 @@
 <script>
 export default {
   name: "SoloGame",
+  props:["value"],
   data: () => ({
-    value: [
-      0,
-      39,
-      19,
-      29,
-      498,
-      1100,
-      1242,
-      1043
-    ],
 
   }),
 }
