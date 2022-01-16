@@ -62,7 +62,7 @@
           <td> {{ row.item.id }}</td>
           <td>
             <v-img
-              :src="row.item.avatar" alt="avatar"
+              :src="row.item.avatar" alt="avatar" width="50"
             ></v-img>
           </td>
           <td> {{ row.item.fullname }}</td>
