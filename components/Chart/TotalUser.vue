@@ -1,20 +1,21 @@
 <template>
   <v-card
     class="mx-auto text-center no-gutters"
-    color="orange darken-2"
+    color="#00cae3"
     dark
-    max-width="800"
   >
     <v-card-text>
-      <v-sheet color="rgba(0, 0, 0, .12)">
+      <v-sheet
+        color="rgba(0, 0, 0, .12)"
+      >
         <v-sparkline
           :value="value"
           :labels="labels"
+          line-width="1"
           color="white"
           height="100"
           padding="24"
           stroke-linecap="round"
-          smooth
           auto-draw
 
         >
@@ -25,11 +26,6 @@
       </v-sheet>
     </v-card-text>
 
-    <v-card-text>
-      <div class="text-h6">
-        تعداد کاربران
-      </div>
-    </v-card-text>
 
     <v-divider></v-divider>
 

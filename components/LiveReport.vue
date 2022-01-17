@@ -1,8 +1,10 @@
 <template>
   <v-alert
-    color="pink"
     border="top"
-    dark
+    colored-border
+    color="amber darken-1"
+    elevation="2"
+    light
   >
     <h3 class="mb-7">گزارش زنده بازی ها</h3>
 

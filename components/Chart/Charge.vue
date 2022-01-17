@@ -10,10 +10,10 @@
         <v-sparkline
           :value="value"
           color="rgba(255, 255, 255, .7)"
+          line-width="1"
           height="100"
           padding="24"
           stroke-linecap="round"
-          smooth
           auto-draw
         >
           <template v-slot:label="item">

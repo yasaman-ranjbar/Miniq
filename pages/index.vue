@@ -45,44 +45,68 @@
 <!--      </v-card-text>-->
 <!--    </v-card>-->
 
-
-
-
-
     <v-row>
-      <v-col
-        class="d-flex child-flex"
-        md="6"
-        sm="12"
-
-      >
-        <TotalUser :value="total_user"/>
+      <v-col lg="4" md="4" sm="12">
+        <v-card
+          light
+          color="white"
+          class="my-8"
+        >
+          <v-card-text>
+            <TotalUser
+              class="yr_margin"
+              :value="total_user"
+            />
+            <h3>تعداد کاربران</h3>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-subtitle>
+            <v-icon>mdi-clock-time-three-outline</v-icon>
+            آخرین آپدیت 24 ساعت پیش
+          </v-card-subtitle>
+        </v-card>
       </v-col>
-      <v-col
-        class="d-flex child-flex"
-        md="6"
-        sm="12"
 
-      >
-        <SoloGame :value="solo_game" />
+      <v-col lg="4" md="4" sm="12">
+        <v-card
+          light
+          color="white"
+          class="my-8"
+        >
+          <v-card-text>
+            <SoloGame
+              class="yr_margin"
+              :value="solo_game"
+            />
+            <h3>بازی نفر به نفر</h3>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-subtitle>
+            <v-icon>mdi-clock-time-three-outline</v-icon>
+            آخرین آپدیت 24 ساعت پیش
+          </v-card-subtitle>
+        </v-card>
       </v-col>
-    </v-row>
-    <v-row>
-      <v-col
-        class="d-flex child-flex"
-        md="6"
-        sm="12"
 
-      >
-        <GroupGame :value="group_game"/>
-      </v-col>
-      <v-col
-        class="d-flex child-flex"
-        md="6"
-        sm="12"
-
-      >
-        <Charge :value="charge"/>
+      <v-col lg="4" md="4" sm="12">
+        <v-card
+          light
+          color="white"
+          class="my-8"
+        >
+          <v-card-text>
+            <GroupGame
+              class="yr_margin"
+              :value="group_game"
+            />
+            <h3>بازی گروهی</h3>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-subtitle>
+            <v-icon>mdi-clock-time-three-outline</v-icon>
+            آخرین آپدیت 24 ساعت پیش
+          </v-card-subtitle>
+        </v-card>
       </v-col>
     </v-row>
   </div>
@@ -129,12 +153,15 @@ export default {
         .then(res => {
           res.data.map(x => {
             this.total_user.push(x.total_register_count);
+            this.total_user = this.total_user.slice().reverse();
           });
           res.data.map(x => {
             this.solo_game.push(x.solo_game_count);
+            this.solo_game = this.solo_game.slice().reverse();
           });
           res.data.map(x => {
             this.group_game.push(x.group_game_count);
+            this.group_game = this.group_game.slice().reverse();
           });
           res.data.map(x => {
             this.charge.push(x.total_charge_gift_count);
@@ -153,3 +180,10 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.yr_margin {
+  position: relative;
+  top: -30px;
+}
+</style>
