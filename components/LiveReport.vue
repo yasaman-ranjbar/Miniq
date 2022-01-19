@@ -31,7 +31,6 @@ export default {
 
 created() {
   this.liveReport()
-  this.list()
 },
 
 
@@ -45,13 +44,6 @@ created() {
       })
     },
 
-
-    list() {
-      this.$axios.$get('/api/admin/dashboard/list')
-        .then( res => {
-          console.log(res)
-        })
-    }
 
   }
 }

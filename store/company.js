@@ -49,9 +49,6 @@ export default {
       return this.$axios({
         url:`/api/admin/companies/list?page=${payload.page}`,
         method: 'get',
-        data: {
-          page: payload.page
-        }
       })
         .then(res => {
           if (res.status === 200) {
