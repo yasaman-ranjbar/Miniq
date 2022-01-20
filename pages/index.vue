@@ -6,45 +6,6 @@
         <LiveReport/>
       </v-col>
     </v-row>
-
-<!--    <v-card-->
-<!--      class="mx-auto text-center no-gutters"-->
-<!--      color="grey lighten-4"-->
-<!--    >-->
-<!--      <v-card-text>-->
-<!--        <v-row>-->
-<!--          <v-col cols="6">-->
-<!--            <template>-->
-<!--              <client-only>-->
-<!--                <div>-->
-<!--                  <VueApexCharts-->
-<!--                    width="500"-->
-<!--                    type="donut"-->
-<!--                    :options="options"-->
-<!--                    :series="series"-->
-<!--                  ></VueApexCharts>-->
-<!--                </div>-->
-<!--              </client-only>-->
-<!--            </template>-->
-<!--          </v-col>-->
-<!--          <v-col cols="6">-->
-<!--            <template>-->
-<!--              <client-only>-->
-<!--                <div>-->
-<!--                  <VueApexCharts-->
-<!--                    width="500"-->
-<!--                    type="bar"-->
-<!--                    :options="options"-->
-<!--                    :series="series"-->
-<!--                  ></VueApexCharts>-->
-<!--                </div>-->
-<!--              </client-only>-->
-<!--            </template>-->
-<!--          </v-col>-->
-<!--        </v-row>-->
-<!--      </v-card-text>-->
-<!--    </v-card>-->
-
     <v-row>
       <v-col lg="4" md="4" sm="12">
         <v-card
@@ -125,14 +86,6 @@ export default {
 
   data() {
     return {
-      // options: {
-      //   xaxis: {
-      //     date: []
-      //   }
-      // },
-      // series: [{
-      //   total_user: []
-      // }],
       total_user: [],
       solo_game: [],
       group_game: [],
@@ -153,26 +106,17 @@ export default {
         .then(res => {
           res.data.map(x => {
             this.total_user.push(x.total_register_count);
-            this.total_user = this.total_user.slice().reverse();
           });
           res.data.map(x => {
             this.solo_game.push(x.solo_game_count);
-            this.solo_game = this.solo_game.slice().reverse();
           });
           res.data.map(x => {
             this.group_game.push(x.group_game_count);
-            this.group_game = this.group_game.slice().reverse();
-          });
-          res.data.map(x => {
-            this.charge.push(x.total_charge_gift_count);
           });
 
-
-          // res.data.map(x => {
-          //   let date = this.$options.filters.formatDate(x.created_at);
-          //   let user = x.total_register_count;
-          //   this.days.push(date + ' - ' + user);
-          // })
+          this.total_user = this.total_user.slice().reverse();
+          this.solo_game = this.solo_game.slice().reverse();
+          this.group_game = this.group_game.slice().reverse();
         })
     },
   }

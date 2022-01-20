@@ -14,7 +14,7 @@
     >
       <template v-slot:item="row" >
         <tr>
-          <td> <img :src="row.item.avatar_file" alt="" width="50"></td>
+          <td> <img :src="row.item.avatar" alt="" width="50"></td>
           <td>{{row.item.name}}</td>
           <td>{{row.item.is_men ? 'پسر' : 'دختر'}}</td>
           <td>{{row.item.price}} تومان</td>

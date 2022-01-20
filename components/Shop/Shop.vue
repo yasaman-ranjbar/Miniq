@@ -4,7 +4,7 @@
       فروشگاه
     </v-card-title>
     <v-card-text>
-      <v-form @submit.prevent="createPremiumAvatar">
+      <v-form @submit.prevent="createShopItem">
         <v-row>
           <v-col
             md="4"
@@ -94,8 +94,8 @@ export default {
   },
 
   methods: {
-    createPremiumAvatar() {
-      this.$emit('addPremiumAvatar')
+    createShopItem() {
+      this.$emit('addShopItem')
     }
 
   }

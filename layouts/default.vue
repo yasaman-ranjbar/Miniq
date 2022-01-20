@@ -62,6 +62,7 @@
           v-else
           :to="item.href ? item.href : null"
           :key="item.name"
+          exact
         >
           <v-list-item-action v-if="item.icon">
             <v-icon>{{ item.icon }}</v-icon>
@@ -90,7 +91,7 @@
       <v-toolbar-title v-text="title" />
       <v-spacer />
 
-      <template>
+      <template v-if="this.$auth.user">
         <div class="ml-4">
             {{ this.$auth.user.fullname }} عزیز خوش آمدید
         </div>
@@ -213,7 +214,7 @@ export default {
           group: "shop",
           name: "shop",
           icon: "mdi-cart",
-          href: "/shop/premiumAvatar",
+          href: "/shop/shopItem",
         },
         { divider: true },
         { header: "سرویس تخفیف" },

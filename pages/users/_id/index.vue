@@ -162,6 +162,7 @@
         <template v-slot:default>
           <thead>
           <tr>
+            <th class="text-center">ردیف</th>
             <th class="text-center">شناسه</th>
             <th class="text-center">شناسه کاربر</th>
             <th class="text-center">مقدار شارژ</th>
@@ -173,6 +174,7 @@
           <tbody>
           <tr v-for="item in charge" :key="item.charge">
             <td class="text-center">{{ item.id }}</td>
+            <td class="text-center">{{ item.id }}</td>
             <td class="text-center">{{ item.user_id }}</td>
             <td class="text-center">{{ item.amount }}</td>
             <td class="text-center">{{ item.operator }}</td>
@@ -183,6 +185,14 @@
         </template>
       </v-simple-table>
     </template>
+    <div>
+      <v-pagination
+        class="ma-4"
+        v-model="page"
+        :length="last_page"
+        :total-visible="7"
+      ></v-pagination>
+    </div>
 
   </div>
 </template>
@@ -218,6 +228,7 @@ export default {
     }
   },
 
+
   created() {
     this.getDiscountCodeList();
     this.getUser();
@@ -243,9 +254,10 @@ export default {
 
     getChargeList() {
       this.$axios
-        .$get(`api/admin/users/show/${this.ids.user_id}/charge/list`)
+        .$get(`api/admin/users/show/${this.ids.user_id}/charge/list?page=${this.last_page}`)
         .then(res => {
             this.charge = res.result.data
+          this.last_page = res.last_page
         })
     },
 
