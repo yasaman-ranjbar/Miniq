@@ -67,7 +67,7 @@ export default {
           align:'right',
         },
         {
-          text: 'آیکون',
+          text: 'آیکن',
           value: '',
           align:'right',
         },
@@ -88,6 +88,11 @@ export default {
         },
         {
           text: 'نوع آیتم',
+          value: '',
+          align:'right',
+        },
+        {
+          text: 'توضیحات',
           value: '',
           align:'right',
         },
@@ -148,7 +153,12 @@ export default {
             this.loading = false;
           }
         });
-      this.form = {};
+      this.form.title = ""
+      this.form.price = ""
+      this.form.amount = ""
+      this.form.description = ""
+      this.form.type = ""
+      this.form.icon_file = ""
     },
 
     goEdit(item) {

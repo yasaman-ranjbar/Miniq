@@ -30,12 +30,13 @@ export default {
   },
 
 created() {
-  this.liveReport()
+    setInterval(this.liveReport , 5000)
 },
 
 
   methods: {
     liveReport() {
+      setInterval('',1000)
       this.$axios.$get('/api/admin/dashboard/live_report')
       .then(res => {
         this.game_count = res.result.game_count

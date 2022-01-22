@@ -31,18 +31,24 @@ export default {
     },
 
     update({ commit }, payload) {
+      let formData = new FormData();
+
+        formData.append("title", payload.title);
+        if(payload.icon_file) {
+          formData.append("icon_file", payload.icon_file);
+        }
+        formData.append("type", payload.type);
+        formData.append("price", payload.price);
+        formData.append("amount", payload.amount);
+        formData.append("description", payload.description);
+
       return this.$axios({
-        url: `/api/admin/companies/edit/${payload.id}`,
+        url: `/api/admin/banks/edit/${payload.id}`,
         method: "put",
-        data: {
-          id: payload.id,
-          title: payload.title,
-          icon_file: payload.icon_file,
-          type: payload.type,
-          price: payload.price,
-          amount: payload.amount,
-          description: payload.description
-        },
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       })
         .then(res => {
           if (res.status === 200) {
@@ -73,5 +79,9 @@ export default {
           err.message
         });
     },
+
+    delete() {
+
+    }
   }
 }

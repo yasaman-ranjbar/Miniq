@@ -54,30 +54,41 @@
         <v-col  md="4">
           <v-card class="ma-5" outlined>
             <v-row>
-              <v-col class="my-10" cols="6" align="center">
+              <v-col class="my-2" md="6" sm="12" align="center">
                 <v-chip
                   class="ma-2"
                   text-color="white"
                   color="green"
-                  label
                 >
                   <v-icon left>
                     mdi-thumb-up
                   </v-icon>
-                  تعداد بازی های برنده: {{ users.winner_count}}
+                   بازی های برنده: {{ users.winner_count}}
                 </v-chip>
               </v-col>
-              <v-col class="my-10" cols="6" align="center">
+              <v-col class="my-2" md="6" sm="12" align="center">
                 <v-chip
                   class="ma-2"
                   text-color="white"
                   color="red"
-                  label
                 >
                   <v-icon left>
                     mdi-thumb-down
                   </v-icon>
-                  تعداد بازی های باخته: {{ users.looser_count}}
+                  بازی های باخته: {{ users.looser_count}}
+                </v-chip>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col class="my-2" md="12" align="center">
+                <v-chip
+                  text-color="white"
+                  color="light-blue darken-1"
+                >
+                  <v-icon left>
+                    mdi-sim
+                  </v-icon>
+                  شارژ : {{ totalCharge}} تومان
                 </v-chip>
               </v-col>
             </v-row>
@@ -173,7 +184,7 @@
           </thead>
           <tbody>
           <tr v-for="item in charge" :key="item.charge">
-            <td class="text-center">{{ item.id }}</td>
+            <td class="text-center">{{ item.index }}</td>
             <td class="text-center">{{ item.id }}</td>
             <td class="text-center">{{ item.user_id }}</td>
             <td class="text-center">{{ item.amount }}</td>
@@ -225,6 +236,8 @@ export default {
       showResult: false,
       showCode: false,
       showCharge: false,
+
+      totalCharge : "",
     }
   },
 
@@ -232,6 +245,7 @@ export default {
   created() {
     this.getDiscountCodeList();
     this.getUser();
+    this.getChargeList();
   },
 
   methods: {
@@ -249,6 +263,7 @@ export default {
         .$get(`api/admin/users/show/${this.ids.user_id}/code/list`)
         .then(res => {
           this.code = res.result.data
+          this.last_page = res.result.last_page
         })
     },
 
@@ -256,8 +271,9 @@ export default {
       this.$axios
         .$get(`api/admin/users/show/${this.ids.user_id}/charge/list?page=${this.last_page}`)
         .then(res => {
-            this.charge = res.result.data
-          this.last_page = res.last_page
+          this.charge = res.result.data
+          this.last_page = res.result.last_page
+          this.totalCharge = (res.result.total) * 1000
         })
     },
 
