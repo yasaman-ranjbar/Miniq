@@ -10,9 +10,9 @@
       <tr>
         <td>{{row.item.version_code}}</td>
         <td>
-          {{row.item.is_force ? 'روشن' : 'خاموش'}}
+          {{row.item.is_force === '0' ? 'خاموش' : 'روشن'}}
           </td>
-      </tr>
+      </tr>``
     </template>
   </v-data-table>
   </div>
@@ -39,7 +39,7 @@ export default {
           align:'right',
         },
         {
-          text: 'وضعیت',
+          text: 'فورس آپدیت',
           value: '',
           align:'right',
         },

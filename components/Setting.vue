@@ -18,6 +18,7 @@
             outlined
           ></v-text-field>
           <v-radio-group
+          label="فورس آپدیت : "
             v-model="form.is_force"
             row
           >

@@ -15,6 +15,8 @@
         <td class="text-center">{{row.item.solo_game_count}}</td>
         <td class="text-center">{{row.item.total_group_game_count}}</td>
         <td class="text-center">{{row.item.group_game_count}}</td>
+        <td class="text-center">{{row.item.total_question_count}}</td>
+        <td class="text-center">{{row.item.question_count}}</td>
         <td class="text-center">{{row.item.total_charge_gift_count}}</td>
         <td class="text-center">{{row.item.code_gift_count}}</td>
       </tr>
@@ -76,6 +78,18 @@ export default {
         },
         {
           text: 'بازی گروهی',
+          value: '',
+          align: 'center',
+          width: '10px'
+        },
+        {
+          text: 'تعداد کل سوالات',
+          value: '',
+          align: 'center',
+          width: '10px'
+        },
+        {
+          text: 'تعداد سوالات امروز',
           value: '',
           align: 'center',
           width: '10px'
