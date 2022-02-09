@@ -18,6 +18,7 @@
         <td class="text-center">{{row.item.total_question_count}}</td>
         <td class="text-center">{{row.item.question_count}}</td>
         <td class="text-center">{{row.item.total_charge_gift_count}}</td>
+        <td class="text-center">{{row.item.charge_gift_count}}</td>
         <td class="text-center">{{row.item.code_gift_count}}</td>
       </tr>
     </template>
@@ -95,7 +96,13 @@ export default {
           width: '10px'
         },
         {
-          text: 'شارژ',
+          text: 'مقدار کل شارژ',
+          value: '',
+          align: 'center',
+          width: '10px'
+        },
+        {
+          text: 'مقدار شارژ امروز',
           value: '',
           align: 'center',
           width: '10px'
