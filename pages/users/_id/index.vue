@@ -173,7 +173,7 @@
         <template v-slot:default>
           <thead>
           <tr>
-            <th class="text-center">ردیف</th>
+            <th class="text-center">تاریخ</th>
             <th class="text-center">شناسه</th>
             <th class="text-center">شناسه کاربر</th>
             <th class="text-center">مقدار شارژ</th>
@@ -184,7 +184,7 @@
           </thead>
           <tbody>
           <tr v-for="item in charge" :key="item.charge">
-            <td class="text-center">{{ item.index }}</td>
+            <td class="text-center">{{ $moment(item.created_at) }}</td>
             <td class="text-center">{{ item.id }}</td>
             <td class="text-center">{{ item.user_id }}</td>
             <td class="text-center">{{ item.amount }}</td>
